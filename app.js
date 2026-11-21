@@ -54,6 +54,7 @@
     btnSettings: document.getElementById('btn-settings'),
     btnCloseSettings: document.getElementById('btn-close-settings'),
 
+    clockPanel: document.getElementById('clock-panel'),
     clockDisplay: document.getElementById('clock-display'),
     clockAmPm: document.getElementById('clock-ampm'),
     flipAmPm: document.getElementById('flip-ampm'),
@@ -467,6 +468,7 @@
     els.locationName.textContent = config.cityName;
 
     // Clock style
+    els.clockPanel.setAttribute('data-style', config.clockStyle);
     els.clockDisplay.setAttribute('data-style', config.clockStyle);
 
     // Dimmer
