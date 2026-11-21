@@ -10,10 +10,10 @@
   <meta name="theme-color" content="#050605">
   <meta name="format-detection" content="telephone=no">
   <title>StandBy 6s — Đồng hồ, Lịch &amp; Thời tiết</title>
-  <link rel="manifest" href="./manifest.json?v=7">
+  <link rel="manifest" href="./manifest.json?v=8">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="stylesheet" href="./styles.css?v=7">
+  <link rel="stylesheet" href="./styles.css?v=8">
 </head>
 <body>
   <!-- Lớp giảm độ sáng phần mềm cho màn hình LCD iPhone 6s ban đêm -->
@@ -67,9 +67,10 @@
 
     <!-- Bố cục chính: Cột Trái (Đồng hồ thuần khiết) + Cột Phải (Lịch ngày + Thời tiết & Độ ẩm) -->
     <main class="bento-grid" role="main">
-      <!-- CỘT TRÁI: ĐỒNG HỒ XẾP TẦNG TỐI GIẢN -->
+      <!-- CỘT TRÁI: ĐỒNG HỒ XẾP TẦNG / LẬT THẺ TỐI GIẢN -->
       <section id="clock-panel" class="panel clock-panel" aria-label="Đồng hồ chính (Chạm để đổi kiểu)">
         <div id="clock-display" class="clock-display" data-style="minimal" role="button" tabindex="0" aria-label="Chạm để đổi kiểu đồng hồ">
+          <!-- Kiểu phẳng (Xếp tầng & Có giây) -->
           <div class="clock-stack">
             <div class="clock-row clock-row-hours">
               <div class="clock-unit clock-hours" aria-label="Giờ">
@@ -83,6 +84,30 @@
               </div>
               <div class="clock-seconds-corner" aria-label="Giây">
                 <span id="s-d1" class="sec-slot">0</span><span id="s-d2" class="sec-slot">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kiểu Lật thẻ cơ tối giản (Flip từng giờ / từng phút) -->
+          <div class="flip-stack" aria-hidden="true">
+            <div class="flip-row">
+              <div id="flip-hours" class="flip-card flip-card-hours">
+                <div class="flip-half flip-top"><span class="flip-digit">18</span></div>
+                <div class="flip-half flip-bottom"><span class="flip-digit">18</span></div>
+                <div class="flip-leaf flip-leaf-top"><span class="flip-digit">18</span></div>
+                <div class="flip-leaf flip-leaf-bottom"><span class="flip-digit">18</span></div>
+                <div class="flip-hinge"></div>
+              </div>
+              <span id="flip-ampm" class="clock-ampm" hidden>PM</span>
+            </div>
+
+            <div class="flip-row">
+              <div id="flip-minutes" class="flip-card flip-card-minutes">
+                <div class="flip-half flip-top"><span class="flip-digit">00</span></div>
+                <div class="flip-half flip-bottom"><span class="flip-digit">00</span></div>
+                <div class="flip-leaf flip-leaf-top"><span class="flip-digit">00</span></div>
+                <div class="flip-leaf flip-leaf-bottom"><span class="flip-digit">00</span></div>
+                <div class="flip-hinge"></div>
               </div>
             </div>
           </div>
@@ -193,7 +218,7 @@
               <span class="setting-name">Kiểu đồng hồ</span>
               <div class="segmented-control" role="group" aria-label="Kiểu đồng hồ">
                 <button type="button" class="seg-btn active" data-clock-style="minimal">Xếp tầng</button>
-                <button type="button" class="seg-btn" data-clock-style="cards">Thẻ đôi</button>
+                <button type="button" class="seg-btn" data-clock-style="flip">Lật thẻ</button>
                 <button type="button" class="seg-btn" data-clock-style="seconds">Có giây</button>
               </div>
             </div>
@@ -230,7 +255,7 @@
     </main>
   </div>
 
-  <script src="./lunar.js?v=7"></script>
-  <script src="./app.js?v=7"></script>
+  <script src="./lunar.js?v=8"></script>
+  <script src="./app.js?v=8"></script>
 </body>
 </html>

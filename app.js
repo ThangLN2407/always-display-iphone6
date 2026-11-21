@@ -14,7 +14,7 @@
     'Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'
   ];
 
-  var CLOCK_STYLES = ['minimal', 'cards', 'seconds'];
+  var CLOCK_STYLES = ['minimal', 'flip', 'seconds'];
 
   function isStandalonePwa() {
     return (
@@ -36,6 +36,8 @@
 
   var config = loadConfig();
   var lastRenderedDateKey = '';
+  var lastHourStr = '';
+  var lastMinuteStr = '';
   var wakeLockSentinel = null;
   var noSleepVideo = null;
   var isWakeLockActive = false;
@@ -54,6 +56,9 @@
 
     clockDisplay: document.getElementById('clock-display'),
     clockAmPm: document.getElementById('clock-ampm'),
+    flipAmPm: document.getElementById('flip-ampm'),
+    flipHours: document.getElementById('flip-hours'),
+    flipMinutes: document.getElementById('flip-minutes'),
     hD1: document.getElementById('h-d1'),
     hD2: document.getElementById('h-d2'),
     mD1: document.getElementById('m-d1'),
@@ -103,8 +108,10 @@
           merged[k] = parsed[k];
         }
       }
-      // Di chuyển cấu hình cũ sang phiên bản v4
-      if (CLOCK_STYLES.indexOf(merged.clockStyle) === -1) {
+      // Di chuyển cấu hình cũ sang phiên bản mới
+      if (merged.clockStyle === 'cards') {
+        merged.clockStyle = 'flip';
+      } else if (CLOCK_STYLES.indexOf(merged.clockStyle) === -1) {
         merged.clockStyle = 'minimal';
       }
       if (merged.forceLandscape === true) {
@@ -141,8 +148,47 @@
   }
 
   // =========================================================================
-  // 1. Đồng hồ & Lịch Âm Dương
+  // 1. Đồng hồ (Xếp tầng & Lật thẻ cơ) + Lịch Âm Dương
   // =========================================================================
+  function setFlipStatic(cardEl, val) {
+    if (!cardEl) return;
+    var digits = cardEl.querySelectorAll('.flip-digit');
+    for (var i = 0; i < digits.length; i++) {
+      digits[i].textContent = val;
+    }
+    cardEl.classList.remove('is-flipping');
+  }
+
+  function triggerFlipCard(cardEl, oldVal, newVal) {
+    if (!cardEl) return;
+    var topStatic = cardEl.querySelector('.flip-top .flip-digit');
+    var bottomStatic = cardEl.querySelector('.flip-bottom .flip-digit');
+    var topLeaf = cardEl.querySelector('.flip-leaf-top .flip-digit');
+    var bottomLeaf = cardEl.querySelector('.flip-leaf-bottom .flip-digit');
+
+    if (cardEl._flipTimer) {
+      clearTimeout(cardEl._flipTimer);
+      cardEl._flipTimer = null;
+    }
+
+    cardEl.classList.remove('is-flipping');
+    topStatic.textContent = newVal;
+    bottomStatic.textContent = oldVal;
+    topLeaf.textContent = oldVal;
+    bottomLeaf.textContent = newVal;
+
+    // Ép reflow để CSS animation kích hoạt mượt mỗi khi nhảy giờ/phút
+    void cardEl.offsetWidth;
+    cardEl.classList.add('is-flipping');
+
+    cardEl._flipTimer = setTimeout(function () {
+      bottomStatic.textContent = newVal;
+      topLeaf.textContent = newVal;
+      cardEl.classList.remove('is-flipping');
+      cardEl._flipTimer = null;
+    }, 460);
+  }
+
   function tickClock() {
     var now = new Date();
     var hours24 = now.getHours();
@@ -166,14 +212,42 @@
     els.sD1.textContent = sStr.charAt(0);
     els.sD2.textContent = sStr.charAt(1);
 
+    // Cập nhật & lật thẻ cơ khi nhảy giờ hoặc nhảy phút
+    if (!lastHourStr) {
+      setFlipStatic(els.flipHours, hStr);
+    } else if (hStr !== lastHourStr) {
+      if (config.clockStyle === 'flip') {
+        triggerFlipCard(els.flipHours, lastHourStr, hStr);
+      } else {
+        setFlipStatic(els.flipHours, hStr);
+      }
+    }
+
+    if (!lastMinuteStr) {
+      setFlipStatic(els.flipMinutes, mStr);
+    } else if (mStr !== lastMinuteStr) {
+      if (config.clockStyle === 'flip') {
+        triggerFlipCard(els.flipMinutes, lastMinuteStr, mStr);
+      } else {
+        setFlipStatic(els.flipMinutes, mStr);
+      }
+    }
+
+    lastHourStr = hStr;
+    lastMinuteStr = mStr;
+
     var pct = ((seconds / 59) * 100).toFixed(1);
     els.secondBar.style.width = pct + '%';
 
     if (config.hourFormat === '12') {
-      els.clockAmPm.textContent = hours24 >= 12 ? 'PM' : 'AM';
+      var ampmText = hours24 >= 12 ? 'PM' : 'AM';
+      els.clockAmPm.textContent = ampmText;
       els.clockAmPm.removeAttribute('hidden');
+      els.flipAmPm.textContent = ampmText;
+      els.flipAmPm.removeAttribute('hidden');
     } else {
       els.clockAmPm.setAttribute('hidden', '');
+      els.flipAmPm.setAttribute('hidden', '');
     }
 
     // Kiểm tra chế độ Đỏ ban đêm tự động (22:00 - 06:00)
@@ -573,6 +647,9 @@
     config.clockStyle = CLOCK_STYLES[nextIdx];
     saveConfig();
     applyConfigToUI();
+    if (config.clockStyle === 'flip' && lastMinuteStr) {
+      triggerFlipCard(els.flipMinutes, lastMinuteStr, lastMinuteStr);
+    }
   }
 
   function searchCity(query) {
@@ -738,9 +815,13 @@
     var styleBtns = document.querySelectorAll('[data-clock-style]');
     for (var i = 0; i < styleBtns.length; i++) {
       styleBtns[i].addEventListener('click', function () {
-        config.clockStyle = this.getAttribute('data-clock-style');
+        var nextStyle = this.getAttribute('data-clock-style');
+        config.clockStyle = nextStyle;
         saveConfig();
         applyConfigToUI();
+        if (nextStyle === 'flip' && lastMinuteStr) {
+          triggerFlipCard(els.flipMinutes, lastMinuteStr, lastMinuteStr);
+        }
       });
     }
 
