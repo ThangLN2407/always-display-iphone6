@@ -726,16 +726,15 @@ input:focus-visible,
   min-width: 0;
 }
 
-/* Khối Lịch Ngày Hiện Tại (Căn giữa + Âm lịch phía dưới) */
+/* Khối Lịch Ngày Hiện Tại (Phủ đầy chiều cao thẻ, không khoảng trống thừa) */
 .calendar-panel {
-  flex: 1.24;
+  flex: 1.15;
   min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
-  gap: clamp(4px, 1.4vmin, 12px);
   padding: 12px 16px;
 }
 
@@ -743,8 +742,8 @@ input:focus-visible,
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 6px;
-  font-size: clamp(0.8rem, 2.2vmin, 1.15rem);
+  gap: 8px;
+  font-size: clamp(0.92rem, 3.1vmin, 1.55rem);
   font-weight: 600;
   line-height: 1.2;
 }
@@ -763,11 +762,12 @@ input:focus-visible,
 }
 
 .cal-today-day {
-  font-size: clamp(3.6rem, 18vmin, 8.6rem);
+  font-size: clamp(4.8rem, 25vmin, 13.5rem);
   font-weight: 700;
-  line-height: 0.92;
+  line-height: 0.85;
   letter-spacing: -0.03em;
   color: var(--text-primary);
+  margin: auto 0;
 }
 
 .cal-today-lunar-wrap {
@@ -778,7 +778,7 @@ input:focus-visible,
 }
 
 .cal-today-lunar {
-  font-size: clamp(0.78rem, 2.1vmin, 1.05rem);
+  font-size: clamp(0.88rem, 2.8vmin, 1.35rem);
   font-weight: 500;
   color: var(--text-secondary);
   line-height: 1.25;
@@ -790,7 +790,7 @@ input:focus-visible,
 }
 
 .cal-today-canchi {
-  font-size: clamp(0.72rem, 1.6vmin, 0.88rem);
+  font-size: clamp(0.75rem, 2.1vmin, 1.02rem);
   font-weight: 400;
   color: var(--text-muted);
   line-height: 1.2;
@@ -800,7 +800,7 @@ input:focus-visible,
    Bottom Row — Weather & Humidity Panels
    ========================================================================== */
 .env-row {
-  flex: 0.92;
+  flex: 1;
   min-height: 0;
   min-width: 0;
   display: grid;
@@ -857,7 +857,7 @@ input:focus-visible,
 }
 
 .metric-number {
-  font-size: clamp(1.9rem, 4.6vw, 3.8rem);
+  font-size: clamp(2.1rem, 6.2vmin, 4.4rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -865,7 +865,7 @@ input:focus-visible,
 }
 
 .metric-unit {
-  font-size: clamp(0.95rem, 2vw, 1.45rem);
+  font-size: clamp(1rem, 2.6vmin, 1.65rem);
   font-weight: 600;
   color: var(--text-secondary);
 }
