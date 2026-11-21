@@ -102,25 +102,25 @@
 }
 
 /* ==========================================================================
-   Design Tokens — Pure Matte Minimalism (Braun / Apple StandBy Utility)
+   Design Tokens — Pure Matte Minimalism (Calm Matte Green Primary Theme)
    ========================================================================== */
 :root {
-  --bg-canvas: #050506;
-  --bg-panel: #0E0F12;
-  --bg-elevated: #16181E;
-  --border-subtle: #1E2028;
-  --border-active: #343846;
+  --bg-canvas: #050605;
+  --bg-panel: #0D0F0E;
+  --bg-elevated: #141816;
+  --border-subtle: #1E2420;
+  --border-active: #313B35;
 
-  --text-primary: #F4F4F0;
-  --text-secondary: #9A9EA9;
-  --text-muted: #7F8390;
+  --text-primary: #F3F5F2;
+  --text-secondary: #95A099;
+  --text-muted: #7B867F;
 
-  --accent: #E86C3A;
-  --accent-ink: #0B0B0D;
-  --accent-soft: rgba(232, 108, 58, 0.16);
+  --accent: #43B874;
+  --accent-ink: #060A07;
+  --accent-soft: rgba(67, 184, 116, 0.16);
 
-  --status-ok: #46B87A;
-  --status-warn: #E5A440;
+  --status-ok: #43B874;
+  --status-warn: #D49B42;
 
   --radius-panel: 14px;
   --radius-pill: 999px;
@@ -282,40 +282,22 @@ input:focus-visible,
 }
 
 /* ==========================================================================
-   Top Status Bar
+   Top Utility Bar (Slim, zero redundant date/time clutter)
    ========================================================================== */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  height: clamp(28px, 7.5vh, 38px);
+  height: clamp(28px, 7.5vh, 36px);
   flex-shrink: 0;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: clamp(0.74rem, 1.8vw, 0.92rem);
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.top-weekday {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.top-sep {
-  color: var(--text-muted);
-}
-
-.top-lunar-badge {
-  color: var(--text-secondary);
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 .topbar-right {
@@ -402,35 +384,16 @@ input:focus-visible,
 }
 
 /* ==========================================================================
-   Left Column — Clock Panel
+   Left Column — Pure Stacked Clock Panel (Zero Redundancy)
    ========================================================================== */
 .clock-panel {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 14px 18px 12px;
   min-height: 0;
   min-width: 0;
   overflow: hidden;
-}
-
-.clock-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.clock-period {
-  font-size: clamp(0.78rem, 1.7vw, 0.96rem);
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.clock-style-tag {
-  font-size: clamp(0.74rem, 1.4vw, 0.84rem);
-  font-weight: 500;
-  color: var(--text-muted);
 }
 
 .clock-display {
@@ -440,7 +403,6 @@ input:focus-visible,
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 2px 0;
 }
 
 .clock-stack {
@@ -449,7 +411,7 @@ input:focus-visible,
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(4px, 1.2vmin, 14px);
+  gap: clamp(4px, 1.4vmin, 14px);
 }
 
 .clock-row {
@@ -462,9 +424,9 @@ input:focus-visible,
 .clock-unit {
   display: inline-flex;
   align-items: baseline;
-  font-size: clamp(5.2rem, 27vmin, 13.5rem);
+  font-size: clamp(5.8rem, 32.5vmin, 15.5rem);
   font-weight: 700;
-  line-height: 0.86;
+  line-height: 0.85;
   letter-spacing: -0.03em;
 }
 
@@ -473,14 +435,23 @@ input:focus-visible,
 }
 
 .clock-minutes {
-  color: var(--text-primary);
-  opacity: 0.86;
+  color: var(--accent);
 }
 
 .digit-slot {
   display: inline-flex;
   justify-content: center;
   width: 0.63em;
+}
+
+.clock-ampm {
+  position: absolute;
+  left: calc(100% + clamp(6px, 1.6vmin, 14px));
+  top: 0.14em;
+  font-size: clamp(0.76rem, 2.8vmin, 1.25rem);
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1;
 }
 
 /* Góc nhỏ bên phải hàng phút dành cho giây (chỉ hiện ở kiểu "Có giây") */
@@ -505,11 +476,11 @@ input:focus-visible,
 
 /* Kiểu 2: Thẻ đôi xếp tầng (Split Stacked Cards) */
 .clock-display[data-style="cards"] .clock-stack {
-  gap: clamp(6px, 1.8vmin, 16px);
+  gap: clamp(6px, 2vmin, 18px);
 }
 
 .clock-display[data-style="cards"] .clock-unit {
-  font-size: clamp(4.3rem, 21.5vmin, 10.8rem);
+  font-size: clamp(4.9rem, 25.5vmin, 12.2rem);
   line-height: 0.92;
   background-color: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
@@ -529,7 +500,7 @@ input:focus-visible,
   background-color: var(--bg-elevated);
   border-radius: 2px;
   overflow: hidden;
-  margin-bottom: clamp(6px, 1.6vmin, 14px);
+  margin-top: 8px;
 }
 
 .second-bar {
@@ -537,30 +508,6 @@ input:focus-visible,
   width: 0%;
   background-color: var(--accent);
   transition: width 250ms linear;
-}
-
-.clock-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.solar-line {
-  font-size: clamp(0.84rem, 1.9vw, 1.05rem);
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.lunar-line {
-  font-size: clamp(0.73rem, 1.55vw, 0.88rem);
-  font-weight: 400;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* ==========================================================================

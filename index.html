@@ -7,30 +7,22 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="StandBy 6s">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#050506">
+  <meta name="theme-color" content="#050605">
   <meta name="format-detection" content="telephone=no">
-  <title>StandBy 6s — Đồng hồ, Lịch Âm Dương &amp; Thời tiết</title>
-  <link rel="manifest" href="./manifest.json?v=6">
+  <title>StandBy 6s — Đồng hồ, Lịch &amp; Thời tiết</title>
+  <link rel="manifest" href="./manifest.json?v=7">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="stylesheet" href="./styles.css?v=6">
+  <link rel="stylesheet" href="./styles.css?v=7">
 </head>
 <body>
   <!-- Lớp giảm độ sáng phần mềm cho màn hình LCD iPhone 6s ban đêm -->
   <div id="dimmer-overlay" class="dimmer-overlay" aria-hidden="true"></div>
 
   <div id="app-shell" class="app-shell">
-    <!-- Thanh trạng thái mảnh tối giản phía trên -->
+    <!-- Thanh điều khiển mảnh tối giản (không lặp lại ngày giờ) -->
     <header class="topbar" role="banner">
       <div class="topbar-left">
-        <span id="top-weekday" class="top-weekday">Thứ Sáu</span>
-        <span class="top-sep" aria-hidden="true">·</span>
-        <span id="top-solar-date" class="top-solar-date">20/11/2026</span>
-        <span class="top-sep" aria-hidden="true">·</span>
-        <span id="top-lunar-badge" class="top-lunar-badge">12/10 Âm</span>
-      </div>
-
-      <div class="topbar-right">
         <button type="button" id="btn-location" class="top-pill" title="Đổi vị trí thời tiết" aria-label="Đổi vị trí thời tiết">
           <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10Z"/>
@@ -43,8 +35,10 @@
           <span id="wakelock-dot" class="status-dot" aria-hidden="true"></span>
           <span id="wakelock-text">Giữ sáng</span>
         </button>
+      </div>
 
-        <button type="button" id="btn-rotate" class="top-pill top-pill-icon" title="Khóa xoay ngang 90 độ khi iPhone khóa dọc" aria-label="Xoay ngang 90 độ" aria-pressed="false">
+      <div class="topbar-right">
+        <button type="button" id="btn-rotate" class="top-pill top-pill-icon" title="Khóa xoay ngang 90 độ / đảo chiều sạc" aria-label="Xoay ngang 90 độ" aria-pressed="false">
           <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="3" y="6" width="18" height="12" rx="2.5"/>
             <path d="M7 10v4M17 12h.01"/>
@@ -71,25 +65,21 @@
       </div>
     </header>
 
-    <!-- Bố cục chính: Cột Trái (Đồng hồ) + Cột Phải (Lịch + Thời tiết & Độ ẩm) -->
+    <!-- Bố cục chính: Cột Trái (Đồng hồ thuần khiết) + Cột Phải (Lịch ngày + Thời tiết & Độ ẩm) -->
     <main class="bento-grid" role="main">
-      <!-- CỘT TRÁI: KHỐI ĐỒNG HỒ XẾP TẦNG TRUNG TÂM -->
+      <!-- CỘT TRÁI: ĐỒNG HỒ XẾP TẦNG TỐI GIẢN -->
       <section id="clock-panel" class="panel clock-panel" aria-label="Đồng hồ chính (Chạm để đổi kiểu)">
-        <div class="clock-header-row">
-          <span id="day-period" class="clock-period">Chiều</span>
-          <span id="clock-style-label" class="clock-style-tag">Xếp tầng</span>
-        </div>
-
         <div id="clock-display" class="clock-display" data-style="minimal" role="button" tabindex="0" aria-label="Chạm để đổi kiểu đồng hồ">
           <div class="clock-stack">
             <div class="clock-row clock-row-hours">
               <div class="clock-unit clock-hours" aria-label="Giờ">
-                <span id="h-d1" class="digit-slot">1</span><span id="h-d2" class="digit-slot">6</span>
+                <span id="h-d1" class="digit-slot">1</span><span id="h-d2" class="digit-slot">8</span>
               </div>
+              <span id="clock-ampm" class="clock-ampm" hidden>PM</span>
             </div>
             <div class="clock-row clock-row-minutes">
               <div class="clock-unit clock-minutes" aria-label="Phút">
-                <span id="m-d1" class="digit-slot">0</span><span id="m-d2" class="digit-slot">5</span>
+                <span id="m-d1" class="digit-slot">0</span><span id="m-d2" class="digit-slot">0</span>
               </div>
               <div class="clock-seconds-corner" aria-label="Giây">
                 <span id="s-d1" class="sec-slot">0</span><span id="s-d2" class="sec-slot">0</span>
@@ -98,15 +88,10 @@
           </div>
         </div>
 
-        <!-- Thanh tiến trình giây mảnh, không dùng hiệu ứng rườm rà -->
+        <!-- Thanh tiến trình giây mảnh -->
         <div class="second-track" aria-hidden="true">
           <div id="second-bar" class="second-bar"></div>
         </div>
-
-        <footer class="clock-footer">
-          <div id="full-solar-line" class="solar-line">Thứ Sáu, 20 Tháng 11, 2026</div>
-          <div id="full-lunar-line" class="lunar-line">Ngày 12 Tháng Mười Âm lịch · Năm Bính Ngọ</div>
-        </footer>
       </section>
 
       <!-- CỘT PHẢI: LỊCH NGÀY HIỆN TẠI + THỜI TIẾT & ĐỘ ẨM (Hoặc Bảng Cài Đặt Gọn) -->
@@ -176,7 +161,7 @@
           </section>
         </div>
 
-        <!-- BẢNG CÀI ĐẶT NHANH GỌN GÀNG (Ẩn mặc định, hiện ngay trong cột phải khi bấm nút Cài đặt) -->
+        <!-- BẢNG CÀI ĐẶT NHANH GỌN GÀNG -->
         <section id="settings-panel" class="panel settings-panel" hidden aria-label="Cài đặt StandBy">
           <div class="settings-header">
             <span class="settings-title">Cài đặt hiển thị</span>
@@ -203,7 +188,7 @@
               <div id="search-results" class="search-results" hidden></div>
             </div>
 
-            <!-- Hàng 1: Kiểu đồng hồ (Full width - 3 nút rộng rãi, không cắt chữ) -->
+            <!-- Kiểu đồng hồ -->
             <div class="setting-item">
               <span class="setting-name">Kiểu đồng hồ</span>
               <div class="segmented-control" role="group" aria-label="Kiểu đồng hồ">
@@ -213,7 +198,7 @@
               </div>
             </div>
 
-            <!-- Hàng 2: Định dạng giờ (24h/12h) + Đỏ ban đêm (Tự động/Bật/Tắt) -->
+            <!-- Định dạng giờ + Đỏ ban đêm -->
             <div class="setting-row-grid">
               <div class="setting-item">
                 <span class="setting-name">Định dạng</span>
@@ -233,7 +218,7 @@
               </div>
             </div>
 
-            <!-- Hàng 3: Giảm sáng phần mềm (LCD Dimmer) -->
+            <!-- Giảm sáng phần mềm -->
             <div class="setting-dimmer-row">
               <label class="setting-name" for="dimmer-range">Giảm sáng LCD</label>
               <input type="range" id="dimmer-range" class="dimmer-range" min="0" max="75" step="5" value="0">
@@ -245,7 +230,7 @@
     </main>
   </div>
 
-  <script src="./lunar.js?v=6"></script>
-  <script src="./app.js?v=6"></script>
+  <script src="./lunar.js?v=7"></script>
+  <script src="./app.js?v=7"></script>
 </body>
 </html>

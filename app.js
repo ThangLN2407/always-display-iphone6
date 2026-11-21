@@ -15,11 +15,6 @@
   ];
 
   var CLOCK_STYLES = ['minimal', 'cards', 'seconds'];
-  var CLOCK_STYLE_LABELS = {
-    minimal: 'Xếp tầng',
-    cards: 'Thẻ đôi',
-    seconds: 'Có giây'
-  };
 
   function isStandalonePwa() {
     return (
@@ -47,9 +42,6 @@
 
   // DOM Elements
   var els = {
-    topWeekday: document.getElementById('top-weekday'),
-    topSolarDate: document.getElementById('top-solar-date'),
-    topLunarBadge: document.getElementById('top-lunar-badge'),
     locationName: document.getElementById('location-name'),
     btnLocation: document.getElementById('btn-location'),
     btnWakelock: document.getElementById('btn-wakelock'),
@@ -60,9 +52,8 @@
     btnSettings: document.getElementById('btn-settings'),
     btnCloseSettings: document.getElementById('btn-close-settings'),
 
-    dayPeriod: document.getElementById('day-period'),
-    clockStyleLabel: document.getElementById('clock-style-label'),
     clockDisplay: document.getElementById('clock-display'),
+    clockAmPm: document.getElementById('clock-ampm'),
     hD1: document.getElementById('h-d1'),
     hD2: document.getElementById('h-d2'),
     mD1: document.getElementById('m-d1'),
@@ -70,8 +61,6 @@
     sD1: document.getElementById('s-d1'),
     sD2: document.getElementById('s-d2'),
     secondBar: document.getElementById('second-bar'),
-    fullSolarLine: document.getElementById('full-solar-line'),
-    fullLunarLine: document.getElementById('full-lunar-line'),
 
     calendarPanel: document.getElementById('calendar-panel'),
     calTodayWeekday: document.getElementById('cal-today-weekday'),
@@ -151,14 +140,6 @@
     return n < 10 ? '0' + n : String(n);
   }
 
-  function getDayPeriodVi(hour) {
-    if (hour >= 5 && hour < 11) return 'Buổi sáng';
-    if (hour >= 11 && hour < 13) return 'Buổi trưa';
-    if (hour >= 13 && hour < 18) return 'Buổi chiều';
-    if (hour >= 18 && hour < 22) return 'Buổi tối';
-    return 'Ban đêm';
-  }
-
   // =========================================================================
   // 1. Đồng hồ & Lịch Âm Dương
   // =========================================================================
@@ -188,11 +169,12 @@
     var pct = ((seconds / 59) * 100).toFixed(1);
     els.secondBar.style.width = pct + '%';
 
-    var periodText = getDayPeriodVi(hours24);
     if (config.hourFormat === '12') {
-      periodText += hours24 >= 12 ? ' · PM' : ' · AM';
+      els.clockAmPm.textContent = hours24 >= 12 ? 'PM' : 'AM';
+      els.clockAmPm.removeAttribute('hidden');
+    } else {
+      els.clockAmPm.setAttribute('hidden', '');
     }
-    els.dayPeriod.textContent = periodText;
 
     // Kiểm tra chế độ Đỏ ban đêm tự động (22:00 - 06:00)
     applyNightModeState(hours24);
@@ -221,15 +203,6 @@
     var wk = WEEKDAYS_VI[now.getDay()];
 
     var lunar = window.LunarCalendar.convertSolar2Lunar(dd, mm, yy, 7);
-
-    // Thanh trạng thái trên cùng
-    els.topWeekday.textContent = wk;
-    els.topSolarDate.textContent = pad2(dd) + '/' + pad2(mm) + '/' + yy;
-    els.topLunarBadge.textContent = pad2(lunar.day) + '/' + pad2(lunar.month) + (lunar.leap ? 'N' : '') + ' Âm';
-
-    // Chân khối đồng hồ
-    els.fullSolarLine.textContent = wk + ', ' + dd + ' Tháng ' + mm + ', ' + yy;
-    els.fullLunarLine.textContent = 'Ngày ' + lunar.day + ' ' + lunar.monthLabel + ' · Năm ' + lunar.yearCanChi;
 
     // Khối lịch ngày hiện tại căn giữa + Âm lịch phía dưới
     els.calTodayWeekday.textContent = wk;
@@ -421,7 +394,6 @@
 
     // Clock style
     els.clockDisplay.setAttribute('data-style', config.clockStyle);
-    els.clockStyleLabel.textContent = CLOCK_STYLE_LABELS[config.clockStyle] || 'Xếp tầng';
 
     // Dimmer
     var dimPct = Number(config.dimmer) || 0;
