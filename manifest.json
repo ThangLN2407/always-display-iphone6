@@ -1,0 +1,26 @@
+{
+  "name": "StandBy 6s",
+  "short_name": "StandBy",
+  "description": "Màn hình chờ ngang tối giản cho iPhone 6s (Đồng hồ, Lịch Âm Dương, Thời tiết & Độ ẩm)",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#050506",
+  "theme_color": "#050506",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-21T04:11:00Z",
+  "title": "Design System: StandBy 6s",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "#E86C3A",
+        "tonalRamp": [
+          "oklch(15% 0.0584 41.2)",
+          "oklch(26% 0.0917 41.2)",
+          "oklch(38% 0.1334 41.2)",
+          "oklch(50% 0.1668 41.2)",
+          "oklch(62% 0.1668 41.2)",
+          "oklch(74% 0.1334 41.2)",
+          "oklch(85% 0.0801 41.2)",
+          "oklch(95% 0.0334 41.2)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Accent Deep Ink",
+        "canonical": "#0B0B0D",
+        "tonalRamp": [
+          "oklch(15% 0.0015 285.9)",
+          "oklch(26% 0.0023 285.9)",
+          "oklch(38% 0.0034 285.9)",
+          "oklch(50% 0.0042 285.9)",
+          "oklch(62% 0.0042 285.9)",
+          "oklch(74% 0.0034 285.9)",
+          "oklch(85% 0.0020 285.9)",
+          "oklch(95% 0.0008 285.9)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Signal Orange Wash",
+        "canonical": "rgba(232, 108, 58, 0.16)",
+        "tonalRamp": [
+          "oklch(15% 0.0584 41.2)",
+          "oklch(26% 0.0917 41.2)",
+          "oklch(38% 0.1334 41.2)",
+          "oklch(50% 0.1668 41.2)",
+          "oklch(62% 0.1668 41.2)",
+          "oklch(74% 0.1334 41.2)",
+          "oklch(85% 0.0801 41.2)",
+          "oklch(95% 0.0334 41.2)"
+        ]
+      },
+      "status-ok": {
+        "role": "secondary",
+        "displayName": "Wake-Lock Emerald",
+        "canonical": "#46B87A",
+        "tonalRamp": [
+          "oklch(15% 0.0484 156.1)",
+          "oklch(26% 0.0760 156.1)",
+          "oklch(38% 0.1106 156.1)",
+          "oklch(50% 0.1383 156.1)",
+          "oklch(62% 0.1383 156.1)",
+          "oklch(74% 0.1106 156.1)",
+          "oklch(85% 0.0664 156.1)",
+          "oklch(95% 0.0277 156.1)"
+        ]
+      },
+      "status-warn": {
+        "role": "secondary",
+        "displayName": "Standby Amber",
+        "canonical": "#E5A440",
+        "tonalRamp": [
+          "oklch(15% 0.0478 74.4)",
+          "oklch(26% 0.0750 74.4)",
+          "oklch(38% 0.1092 74.4)",
+          "oklch(50% 0.1364 74.4)",
+          "oklch(62% 0.1364 74.4)",
+          "oklch(74% 0.1092 74.4)",
+          "oklch(85% 0.0655 74.4)",
+          "oklch(95% 0.0273 74.4)"
+        ]
+      },
+      "bg-canvas": {
+        "role": "neutral",
+        "displayName": "Pitch Obsidian Canvas",
+        "canonical": "#050506",
+        "tonalRamp": [
+          "oklch(15% 0.0011 285.9)",
+          "oklch(26% 0.0018 285.9)",
+          "oklch(38% 0.0026 285.9)",
+          "oklch(50% 0.0032 285.9)",
+          "oklch(62% 0.0032 285.9)",
+          "oklch(74% 0.0026 285.9)",
+          "oklch(85% 0.0015 285.9)",
+          "oklch(95% 0.0006 285.9)"
+        ]
+      },
+      "bg-panel": {
+        "role": "neutral",
+        "displayName": "Matte Charcoal Panel",
+        "canonical": "#0E0F12",
+        "tonalRamp": [
+          "oklch(15% 0.0023 271.0)",
+          "oklch(26% 0.0036 271.0)",
+          "oklch(38% 0.0052 271.0)",
+          "oklch(50% 0.0065 271.0)",
+          "oklch(62% 0.0065 271.0)",
+          "oklch(74% 0.0052 271.0)",
+          "oklch(85% 0.0031 271.0)",
+          "oklch(95% 0.0013 271.0)"
+        ]
+      },
+      "bg-elevated": {
+        "role": "neutral",
+        "displayName": "Elevated Slate",
+        "canonical": "#16181E",
+        "tonalRamp": [
+          "oklch(15% 0.0043 270.8)",
+          "oklch(26% 0.0068 270.8)",
+          "oklch(38% 0.0098 270.8)",
+          "oklch(50% 0.0123 270.8)",
+          "oklch(62% 0.0123 270.8)",
+          "oklch(74% 0.0098 270.8)",
+          "oklch(85% 0.0059 270.8)",
+          "oklch(95% 0.0025 270.8)"
+        ]
+      },
+      "border-subtle": {
+        "role": "neutral",
+        "displayName": "Hairline Slate",
+        "canonical": "#1E2028",
+        "tonalRamp": [
+          "oklch(15% 0.0054 274.2)",
+          "oklch(26% 0.0085 274.2)",
+          "oklch(38% 0.0124 274.2)",
+          "oklch(50% 0.0155 274.2)",
+          "oklch(62% 0.0155 274.2)",
+          "oklch(74% 0.0124 274.2)",
+          "oklch(85% 0.0074 274.2)",
+          "oklch(95% 0.0031 274.2)"
+        ]
+      },
+      "border-active": {
+        "role": "neutral",
+        "displayName": "Active Slate Border",
+        "canonical": "#343846",
+        "tonalRamp": [
+          "oklch(15% 0.0088 272.5)",
+          "oklch(26% 0.0138 272.5)",
+          "oklch(38% 0.0201 272.5)",
+          "oklch(50% 0.0252 272.5)",
+          "oklch(62% 0.0252 272.5)",
+          "oklch(74% 0.0201 272.5)",
+          "oklch(85% 0.0121 272.5)",
+          "oklch(95% 0.0050 272.5)"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Warm Ivory",
+        "canonical": "#F4F4F0",
+        "tonalRamp": [
+          "oklch(15% 0.0019 106.5)",
+          "oklch(26% 0.0029 106.5)",
+          "oklch(38% 0.0042 106.5)",
+          "oklch(50% 0.0053 106.5)",
+          "oklch(62% 0.0053 106.5)",
+          "oklch(74% 0.0042 106.5)",
+          "oklch(85% 0.0025 106.5)",
+          "oklch(95% 0.0011 106.5)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Muted Cool Slate",
+        "canonical": "#9A9EA9",
+        "tonalRamp": [
+          "oklch(15% 0.0058 269.9)",
+          "oklch(26% 0.0092 269.9)",
+          "oklch(38% 0.0133 269.9)",
+          "oklch(50% 0.0166 269.9)",
+          "oklch(62% 0.0166 269.9)",
+          "oklch(74% 0.0133 269.9)",
+          "oklch(85% 0.0080 269.9)",
+          "oklch(95% 0.0033 269.9)"
+        ]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Subtle Slate",
+        "canonical": "#7F8390",
+        "tonalRamp": [
+          "oklch(15% 0.0071 272.1)",
+          "oklch(26% 0.0111 272.1)",
+          "oklch(38% 0.0161 272.1)",
+          "oklch(50% 0.0202 272.1)",
+          "oklch(62% 0.0202 272.1)",
+          "oklch(74% 0.0161 272.1)",
+          "oklch(85% 0.0097 272.1)",
+          "oklch(95% 0.0040 272.1)"
+        ]
+      },
+      "night-bg-canvas": {
+        "role": "neutral",
+        "displayName": "Night Pitch Black",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0)",
+          "oklch(26% 0.0000 0)",
+          "oklch(38% 0.0000 0)",
+          "oklch(50% 0.0000 0)",
+          "oklch(62% 0.0000 0)",
+          "oklch(74% 0.0000 0)",
+          "oklch(85% 0.0000 0)",
+          "oklch(95% 0.0000 0)"
+        ]
+      },
+      "night-bg-panel": {
+        "role": "neutral",
+        "displayName": "Night Crimson Panel",
+        "canonical": "#080202",
+        "tonalRamp": [
+          "oklch(15% 0.0067 21.0)",
+          "oklch(26% 0.0106 21.0)",
+          "oklch(38% 0.0154 21.0)",
+          "oklch(50% 0.0193 21.0)",
+          "oklch(62% 0.0193 21.0)",
+          "oklch(74% 0.0154 21.0)",
+          "oklch(85% 0.0093 21.0)",
+          "oklch(95% 0.0039 21.0)"
+        ]
+      },
+      "night-bg-elevated": {
+        "role": "neutral",
+        "displayName": "Night Burgundy Elevated",
+        "canonical": "#120505",
+        "tonalRamp": [
+          "oklch(15% 0.0091 21.0)",
+          "oklch(26% 0.0143 21.0)",
+          "oklch(38% 0.0209 21.0)",
+          "oklch(50% 0.0261 21.0)",
+          "oklch(62% 0.0261 21.0)",
+          "oklch(74% 0.0209 21.0)",
+          "oklch(85% 0.0125 21.0)",
+          "oklch(95% 0.0052 21.0)"
+        ]
+      },
+      "night-border-subtle": {
+        "role": "neutral",
+        "displayName": "Night Crimson Hairline",
+        "canonical": "#2A0808",
+        "tonalRamp": [
+          "oklch(15% 0.0199 24.0)",
+          "oklch(26% 0.0313 24.0)",
+          "oklch(38% 0.0455 24.0)",
+          "oklch(50% 0.0569 24.0)",
+          "oklch(62% 0.0569 24.0)",
+          "oklch(74% 0.0455 24.0)",
+          "oklch(85% 0.0273 24.0)",
+          "oklch(95% 0.0114 24.0)"
+        ]
+      },
+      "night-border-active": {
+        "role": "neutral",
+        "displayName": "Night Active Crimson Border",
+        "canonical": "#521010",
+        "tonalRamp": [
+          "oklch(15% 0.0340 25.6)",
+          "oklch(26% 0.0534 25.6)",
+          "oklch(38% 0.0776 25.6)",
+          "oklch(50% 0.0970 25.6)",
+          "oklch(62% 0.0970 25.6)",
+          "oklch(74% 0.0776 25.6)",
+          "oklch(85% 0.0466 25.6)",
+          "oklch(95% 0.0194 25.6)"
+        ]
+      },
+      "night-text-primary": {
+        "role": "neutral",
+        "displayName": "Night Primary Crimson",
+        "canonical": "#FF2D2A",
+        "tonalRamp": [
+          "oklch(15% 0.0840 27.9)",
+          "oklch(26% 0.1320 27.9)",
+          "oklch(38% 0.1920 27.9)",
+          "oklch(50% 0.2400 27.9)",
+          "oklch(62% 0.2400 27.9)",
+          "oklch(74% 0.1920 27.9)",
+          "oklch(85% 0.1152 27.9)",
+          "oklch(95% 0.0480 27.9)"
+        ]
+      },
+      "night-text-secondary": {
+        "role": "neutral",
+        "displayName": "Night Secondary Crimson",
+        "canonical": "#F0352E",
+        "tonalRamp": [
+          "oklch(15% 0.0780 28.1)",
+          "oklch(26% 0.1226 28.1)",
+          "oklch(38% 0.1783 28.1)",
+          "oklch(50% 0.2229 28.1)",
+          "oklch(62% 0.2229 28.1)",
+          "oklch(74% 0.1783 28.1)",
+          "oklch(85% 0.1070 28.1)",
+          "oklch(95% 0.0446 28.1)"
+        ]
+      },
+      "night-text-muted": {
+        "role": "neutral",
+        "displayName": "Night Muted Crimson",
+        "canonical": "#E62E2D",
+        "tonalRamp": [
+          "oklch(15% 0.0765 27.1)",
+          "oklch(26% 0.1202 27.1)",
+          "oklch(38% 0.1748 27.1)",
+          "oklch(50% 0.2185 27.1)",
+          "oklch(62% 0.2185 27.1)",
+          "oklch(74% 0.1748 27.1)",
+          "oklch(85% 0.1049 27.1)",
+          "oklch(95% 0.0437 27.1)"
+        ]
+      },
+      "night-accent": {
+        "role": "primary",
+        "displayName": "Night Signal Red",
+        "canonical": "#FF3B30",
+        "tonalRamp": [
+          "oklch(15% 0.0812 28.7)",
+          "oklch(26% 0.1277 28.7)",
+          "oklch(38% 0.1857 28.7)",
+          "oklch(50% 0.2321 28.7)",
+          "oklch(62% 0.2321 28.7)",
+          "oklch(74% 0.1857 28.7)",
+          "oklch(85% 0.1114 28.7)",
+          "oklch(95% 0.0464 28.7)"
+        ]
+      },
+      "night-accent-ink": {
+        "role": "primary",
+        "displayName": "Night Accent Ink",
+        "canonical": "#050000",
+        "tonalRamp": [
+          "oklch(15% 0.0104 29.2)",
+          "oklch(26% 0.0163 29.2)",
+          "oklch(38% 0.0237 29.2)",
+          "oklch(50% 0.0296 29.2)",
+          "oklch(62% 0.0296 29.2)",
+          "oklch(74% 0.0237 29.2)",
+          "oklch(85% 0.0142 29.2)",
+          "oklch(95% 0.0059 29.2)"
+        ]
+      },
+      "night-accent-soft": {
+        "role": "primary",
+        "displayName": "Night Signal Wash",
+        "canonical": "rgba(255, 59, 48, 0.16)",
+        "tonalRamp": [
+          "oklch(15% 0.0812 28.7)",
+          "oklch(26% 0.1277 28.7)",
+          "oklch(38% 0.1857 28.7)",
+          "oklch(50% 0.2321 28.7)",
+          "oklch(62% 0.2321 28.7)",
+          "oklch(74% 0.1857 28.7)",
+          "oklch(85% 0.1114 28.7)",
+          "oklch(95% 0.0464 28.7)"
+        ]
+      },
+      "night-status-ok": {
+        "role": "secondary",
+        "displayName": "Night Wake-Lock Red",
+        "canonical": "#FF3B30",
+        "tonalRamp": [
+          "oklch(15% 0.0812 28.7)",
+          "oklch(26% 0.1277 28.7)",
+          "oklch(38% 0.1857 28.7)",
+          "oklch(50% 0.2321 28.7)",
+          "oklch(62% 0.2321 28.7)",
+          "oklch(74% 0.1857 28.7)",
+          "oklch(85% 0.1114 28.7)",
+          "oklch(95% 0.0464 28.7)"
+        ]
+      },
+      "night-status-warn": {
+        "role": "secondary",
+        "displayName": "Night Standby Crimson",
+        "canonical": "#E62E2D",
+        "tonalRamp": [
+          "oklch(15% 0.0765 27.1)",
+          "oklch(26% 0.1202 27.1)",
+          "oklch(38% 0.1748 27.1)",
+          "oklch(50% 0.2185 27.1)",
+          "oklch(62% 0.2185 27.1)",
+          "oklch(74% 0.1748 27.1)",
+          "oklch(85% 0.1049 27.1)",
+          "oklch(95% 0.0437 27.1)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Clock Numerals",
+        "purpose": "Oversized across-the-room HH:MM clock readout (Minimal baseline; Split Cards scales 3.5rem–7.6rem, Bold scales 4.9rem–10.5rem)."
+      },
+      "headline": {
+        "displayName": "Environmental Metric",
+        "purpose": "Primary outdoor temperature and relative humidity figures read at a glance."
+      },
+      "title": {
+        "displayName": "Panel & Date Title",
+        "purpose": "Full solar date line, monthly calendar header, day period, and inline Settings title."
+      },
+      "body": {
+        "displayName": "Body & Condition Copy",
+        "purpose": "Top-bar date context, weather/humidity condition descriptions, lunar date subtitle, calendar solar dates, and city search input."
+      },
+      "label": {
+        "displayName": "Compact Control & Metadata",
+        "purpose": "Top-bar utility pills, weekday column headers, segmented buttons, preset chips, secondary buttons, and telemetry footers."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "pill-state",
+        "value": "150ms ease-out",
+        "purpose": "Hover, active, and expanded border/surface/ink transitions on top-bar utility pills."
+      },
+      {
+        "name": "colon-pulse",
+        "value": "180ms ease-out",
+        "purpose": "Once-per-second clock colon opacity pulse between 1 and 0.28."
+      },
+      {
+        "name": "dimmer-fade",
+        "value": "200ms ease-out",
+        "purpose": "Full-screen black LCD dimmer overlay opacity smoothing."
+      },
+      {
+        "name": "second-bar-step",
+        "value": "250ms linear",
+        "purpose": "Hairline 2px clock second progress bar horizontal advance."
+      },
+      {
+        "name": "humidity-bar-step",
+        "value": "300ms ease-out",
+        "purpose": "Relative humidity 4px linear indicator width update."
+      },
+      {
+        "name": "pixel-shift",
+        "value": "600ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Subtle ±1px LCD burn-in protection shift triggered every 10 minutes on the root shell."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "portrait-compact",
+        "value": "max-width: 560px and orientation: portrait"
+      },
+      {
+        "name": "landscape-baseline",
+        "value": "667px"
+      },
+      {
+        "name": "desktop-wide",
+        "value": "min-width: 1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Top Bar Utility Pills",
+      "kind": "nav",
+      "refersTo": "top-pill",
+      "description": "Compact 30px matte capsule controls for location, wake-lock status, 90° lock, Night Red mode, and inline Settings.",
+      "html": "<div class=\"ds-topbar-group\"><button type=\"button\" class=\"ds-top-pill\"><svg class=\"ds-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10Z\"/><circle cx=\"12\" cy=\"11\" r=\"2.2\"/></svg><span>Hà Nội</span></button><button type=\"button\" class=\"ds-top-pill\"><span class=\"ds-status-dot ds-status-ok\"></span><span>Giữ sáng</span></button><button type=\"button\" class=\"ds-top-pill ds-top-pill-icon\" aria-pressed=\"true\"><svg class=\"ds-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z\"/></svg></button></div>",
+      "css": ".ds-topbar-group { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); font-variant-numeric: tabular-nums; } .ds-top-pill { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 6px 12px; background-color: var(--bg-panel, #0E0F12); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-pill, 999px); font-size: 0.75rem; font-weight: 500; color: var(--text-secondary, #9A9EA9); cursor: pointer; white-space: nowrap; transition: border-color 150ms ease-out, color 150ms ease-out, background-color 150ms ease-out; } .ds-top-pill-icon { padding: 6px 10px; } .ds-top-pill:hover, .ds-top-pill[aria-pressed=\"true\"] { border-color: var(--border-active, #343846); color: var(--text-primary, #F4F4F0); background-color: var(--bg-elevated, #16181E); } .ds-top-pill:focus-visible { outline: 2px solid var(--accent, #E86C3A); outline-offset: 2px; } .ds-icon { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.85; stroke-linecap: round; stroke-linejoin: round; fill: none; } .ds-status-dot { width: 7px; height: 7px; border-radius: 50%; background-color: var(--status-warn, #E5A440); } .ds-status-dot.ds-status-ok { background-color: var(--status-ok, #46B87A); }"
+    },
+    {
+      "name": "Secondary Action Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Compact 30px matte action button used for city search submission and GPS coordinate lookup inside Settings.",
+      "html": "<div class=\"ds-btn-row\"><button type=\"button\" class=\"ds-btn-secondary\">Tìm</button><button type=\"button\" class=\"ds-btn-secondary\">GPS</button><button type=\"button\" class=\"ds-btn-close\">Đóng</button></div>",
+      "css": ".ds-btn-row { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); } .ds-btn-secondary { height: 30px; padding: 5px 10px; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-sm, 8px); font-size: 0.74rem; font-weight: 600; color: var(--text-primary, #F4F4F0); cursor: pointer; white-space: nowrap; } .ds-btn-secondary:hover { border-color: var(--border-active, #343846); } .ds-btn-secondary:focus-visible, .ds-btn-close:focus-visible { outline: 2px solid var(--accent, #E86C3A); outline-offset: 2px; } .ds-btn-close { padding: 3px 8px; background: none; border: none; border-radius: var(--radius-sm, 8px); font-size: 0.78rem; font-weight: 600; color: var(--accent, #E86C3A); cursor: pointer; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "button",
+      "refersTo": "segmented-button",
+      "description": "Inline equal-width option selector for clock styles, 24h/12h format, and Night Red scheduling.",
+      "html": "<div class=\"ds-seg-group\" role=\"group\" aria-label=\"Kiểu đồng hồ\"><button type=\"button\" class=\"ds-seg-btn ds-seg-active\">Tối giản</button><button type=\"button\" class=\"ds-seg-btn\">Thẻ đôi</button><button type=\"button\" class=\"ds-seg-btn\">Đậm nét</button></div>",
+      "css": ".ds-seg-group { display: flex; gap: 4px; width: 260px; font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); } .ds-seg-btn { flex: 1; padding: 5px 6px; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-sm, 8px); font-size: 0.72rem; font-weight: 500; color: var(--text-secondary, #9A9EA9); cursor: pointer; white-space: nowrap; } .ds-seg-btn:hover { border-color: var(--border-active, #343846); color: var(--text-primary, #F4F4F0); } .ds-seg-btn.ds-seg-active { background-color: var(--accent-soft, rgba(232, 108, 58, 0.16)); border-color: var(--accent, #E86C3A); color: var(--text-primary, #F4F4F0); } .ds-seg-btn:focus-visible { outline: 2px solid var(--accent, #E86C3A); outline-offset: 2px; }"
+    },
+    {
+      "name": "City Search Input",
+      "kind": "input",
+      "refersTo": "input-city",
+      "description": "Compact 30px matte search field paired with inline accent caret and 2px focus-visible ring.",
+      "html": "<div class=\"ds-search-row\"><input type=\"text\" class=\"ds-city-input\" placeholder=\"Tìm tỉnh, thành phố...\" aria-label=\"Tìm tỉnh, thành phố\"><button type=\"button\" class=\"ds-search-submit\">Tìm</button></div>",
+      "css": ".ds-search-row { display: flex; gap: 6px; width: 280px; font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); } .ds-city-input { flex: 1; height: 30px; padding: 5px 10px; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-sm, 8px); font-size: 0.76rem; color: var(--text-primary, #F4F4F0); caret-color: var(--accent, #E86C3A); } .ds-city-input::placeholder { color: var(--text-muted, #7F8390); } .ds-city-input:focus-visible, .ds-search-submit:focus-visible { outline: 2px solid var(--accent, #E86C3A); outline-offset: 2px; } .ds-search-submit { height: 30px; padding: 5px 10px; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-sm, 8px); font-size: 0.74rem; font-weight: 600; color: var(--text-primary, #F4F4F0); cursor: pointer; } .ds-search-submit:hover { border-color: var(--border-active, #343846); }"
+    },
+    {
+      "name": "Preset City Chips",
+      "kind": "chip",
+      "refersTo": "chip-city",
+      "description": "Capsule location chips highlighting the active Vietnamese city with a 1px Signal Orange border.",
+      "html": "<div class=\"ds-chip-wrap\"><button type=\"button\" class=\"ds-chip-city ds-chip-active\">Hà Nội</button><button type=\"button\" class=\"ds-chip-city\">TP.HCM</button><button type=\"button\" class=\"ds-chip-city\">Đà Nẵng</button><button type=\"button\" class=\"ds-chip-city\">Đà Lạt</button></div>",
+      "css": ".ds-chip-wrap { display: flex; flex-wrap: wrap; gap: 5px; font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); } .ds-chip-city { padding: 4px 9px; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-pill, 999px); font-size: 0.72rem; font-weight: 500; color: var(--text-secondary, #9A9EA9); cursor: pointer; } .ds-chip-city:hover, .ds-chip-city.ds-chip-active { border-color: var(--accent, #E86C3A); color: var(--text-primary, #F4F4F0); } .ds-chip-city:focus-visible { outline: 2px solid var(--accent, #E86C3A); outline-offset: 2px; }"
+    },
+    {
+      "name": "Environmental Telemetry Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat 14px-radius matte panel presenting stroke icon, comfort label, bold tabular reading, hairline progress bar, and muted metadata.",
+      "html": "<section class=\"ds-env-panel\"><div class=\"ds-env-top\"><svg class=\"ds-weather-svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3.2c-3.8 5.2-6.5 8.5-6.5 12.1a6.5 6.5 0 0 0 13 0c0-3.6-2.7-6.9-6.5-12.1Z\"/></svg><span class=\"ds-env-cond\">Dễ chịu</span></div><div class=\"ds-env-main\"><span class=\"ds-metric-num\">68</span><span class=\"ds-metric-unit\">%</span></div><div class=\"ds-bar-track\"><div class=\"ds-bar-fill\" style=\"width:68%\"></div></div><div class=\"ds-env-meta\"><span>Sương 19°C</span><span>11:04</span></div></section>",
+      "css": ".ds-env-panel { display: flex; flex-direction: column; justify-content: space-between; width: 176px; height: 136px; padding: 12px 14px; background-color: var(--bg-panel, #0E0F12); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-panel, 14px); font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); font-variant-numeric: tabular-nums; } .ds-env-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; } .ds-weather-svg { width: 18px; height: 18px; stroke: var(--text-primary, #F4F4F0); stroke-width: 1.85; stroke-linecap: round; stroke-linejoin: round; fill: none; } .ds-env-cond { font-size: 0.8rem; font-weight: 500; color: var(--text-secondary, #9A9EA9); } .ds-env-main { display: flex; align-items: baseline; gap: 3px; } .ds-metric-num { font-size: 2.3rem; font-weight: 700; line-height: 1; letter-spacing: -0.03em; color: var(--text-primary, #F4F4F0); } .ds-metric-unit { font-size: 1.05rem; font-weight: 600; color: var(--text-secondary, #9A9EA9); } .ds-bar-track { width: 100%; height: 4px; background-color: var(--bg-elevated, #16181E); border-radius: 2px; overflow: hidden; } .ds-bar-fill { height: 100%; background-color: var(--accent, #E86C3A); border-radius: 2px; transition: width 300ms ease-out; } .ds-env-meta { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 500; color: var(--text-muted, #7F8390); }"
+    },
+    {
+      "name": "Split-Card Clock Display",
+      "kind": "custom",
+      "refersTo": "clock-card-unit",
+      "description": "Signature tabular clock readout in Thẻ đôi split-card style with fixed-width digit tiles and hairline seconds progress track.",
+      "html": "<div class=\"ds-clock-card\"><div class=\"ds-clock-row\"><span class=\"ds-clock-unit\">11</span><span class=\"ds-clock-colon\">:</span><span class=\"ds-clock-unit\">04</span><span class=\"ds-clock-sec\">28</span></div><div class=\"ds-sec-track\"><div class=\"ds-sec-bar\" style=\"width:47%\"></div></div></div>",
+      "css": ".ds-clock-card { display: flex; flex-direction: column; gap: 12px; width: 290px; padding: 14px 18px; background-color: var(--bg-panel, #0E0F12); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-panel, 14px); font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); font-variant-numeric: tabular-nums; } .ds-clock-row { display: inline-flex; align-items: baseline; justify-content: center; gap: 6px; } .ds-clock-unit { padding: 0.09em 0.14em; background-color: var(--bg-elevated, #16181E); border: 1px solid var(--border-subtle, #1E2028); border-radius: 10px; font-size: 3.6rem; font-weight: 700; line-height: 0.94; letter-spacing: -0.03em; color: var(--text-primary, #F4F4F0); } .ds-clock-colon { font-size: 3.6rem; font-weight: 700; line-height: 0.94; color: var(--text-secondary, #9A9EA9); transform: translateY(-0.06em); transition: opacity 180ms ease-out; } .ds-clock-sec { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text-secondary, #9A9EA9); } .ds-sec-track { width: 100%; height: 2px; background-color: var(--bg-elevated, #16181E); border-radius: 2px; overflow: hidden; } .ds-sec-bar { height: 100%; background-color: var(--accent, #E86C3A); transition: width 250ms linear; }"
+    },
+    {
+      "name": "Vietnamese Solar/Lunar Calendar",
+      "kind": "custom",
+      "refersTo": "calendar-cell-today",
+      "description": "7-column Vietnamese monthly calendar row illustrating solar numbers, lunar subscripts, special 1st/15th accent, Sunday accent, and today highlight.",
+      "html": "<div class=\"ds-cal-panel\"><div class=\"ds-cal-wk\"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span class=\"ds-sun\">CN</span></div><div class=\"ds-cal-row\"><div class=\"ds-cal-cell\"><span class=\"ds-sol\">16</span><sub class=\"ds-lun\">8</sub></div><div class=\"ds-cal-cell\"><span class=\"ds-sol\">17</span><sub class=\"ds-lun\">9</sub></div><div class=\"ds-cal-cell\"><span class=\"ds-sol\">18</span><sub class=\"ds-lun\">10</sub></div><div class=\"ds-cal-cell\"><span class=\"ds-sol\">19</span><sub class=\"ds-lun\">11</sub></div><div class=\"ds-cal-cell\"><span class=\"ds-sol\">20</span><sub class=\"ds-lun ds-special\">1/10</sub></div><div class=\"ds-cal-cell ds-today\"><span class=\"ds-sol\">21</span><sub class=\"ds-lun\">13</sub></div><div class=\"ds-cal-cell ds-sun\"><span class=\"ds-sol\">22</span><sub class=\"ds-lun\">14</sub></div></div></div>",
+      "css": ".ds-cal-panel { width: 300px; padding: 10px 14px 12px; background-color: var(--bg-panel, #0E0F12); border: 1px solid var(--border-subtle, #1E2028); border-radius: var(--radius-panel, 14px); font-family: var(--font-sans, 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif); font-variant-numeric: tabular-nums; } .ds-cal-wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 0.72rem; font-weight: 600; color: var(--text-muted, #7F8390); padding-bottom: 4px; border-bottom: 1px solid var(--border-subtle, #1E2028); } .ds-cal-row { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; padding-top: 6px; } .ds-cal-cell { display: flex; align-items: baseline; justify-content: center; gap: 3px; height: 28px; border-radius: 7px; padding: 2px 3px; line-height: 1; } .ds-sol { font-size: 0.78rem; font-weight: 600; color: var(--text-primary, #F4F4F0); } .ds-lun { font-size: 0.6rem; font-weight: 400; color: var(--text-muted, #7F8390); vertical-align: baseline; } .ds-sun, .ds-sun .ds-sol, .ds-special { color: var(--accent, #E86C3A); font-weight: 600; } .ds-today { background-color: var(--accent, #E86C3A); align-items: center; gap: 4px; } .ds-today .ds-sol { color: var(--accent-ink, #0B0B0D); font-weight: 700; } .ds-today .ds-lun { color: var(--accent-ink, #0B0B0D); font-weight: 500; opacity: 0.72; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Bedside Instrument",
+    "overview": "StandBy 6s translates the calm physical clarity of a Braun desktop chronometer and Apple StandBy utility into a dedicated always-on landscape display for an iPhone 6s (`667×375` baseline). Every decision serves effortless glanceability from 1–3 meters away in daylight or a pitch-black bedroom, pairing oversized tabular numerals on flat matte charcoal surfaces with disciplined 1px structural hairlines and zero decorative clutter.\n\nThermal and visual restraint are inseparable here. The surface rejects glassmorphism, neon glows, drop shadows, gradients, 3D skeuomorphic bevels, and continuous 60fps animation loops so the hardware stays cool on 24/7 charging power while remaining visually serene. When darkness falls, the entire token layer pivots cleanly into narrow-spectrum Night Red mode—eliminating cool wavelengths without sacrificing WCAG AA legibility.",
+    "keyCharacteristics": [
+      "Flat matte dark surface layering separated by crisp 1px hairlines rather than drop shadows or blur",
+      "Oversized tabular numerals in self-hosted Be Vietnam Pro engineered for 1–3 meter readability and crisp Vietnamese diacritics",
+      "Single warm Signal Orange accent for live temporal and telemetry anchors, paired with a full narrow-spectrum Night Red theme",
+      "Hardware-sympathetic motion limited to brief state transitions, once-per-second time updates, and a 10-minute ±1px LCD pixel shift"
+    ],
+    "rules": [
+      {
+        "name": "The Single Signal Accent Rule",
+        "body": "Warm Signal Orange (`#E86C3A`) is reserved strictly for active temporal anchors and live telemetry—today's calendar badge, Sundays, lunar 1st/15th markers, hairline progress fills, active settings controls, focus rings, and inline actions. No secondary decorative accent competes with it; the only non-orange chromatic elements are the 7px wake-lock hardware status dots (`#46B87A` active, `#E5A440` standby).",
+        "section": "colors"
+      },
+      {
+        "name": "The Narrow-Spectrum Night Rule",
+        "body": "When Night Red mode is active (manually or automatically between 22:00 and 06:00), every canvas, panel, border, text ink, accent, and wake-lock dot collapses exclusively into narrow-spectrum crimson (`#FF2D2A`–`#E62E2D` on `#000000`–`#120505`) while maintaining WCAG AA contrast (≥ 4.5:1) and zero blue/green wavelength emission.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Lock Rule",
+        "body": "Every numeric figure across the clock, Vietnamese solar/lunar dates, monthly calendar cells, temperature, humidity, and dimmer readout enforces tabular numerals (`font-variant-numeric: tabular-nums` and `\"tnum\" 1`), with fixed `0.62em` hour/minute digit slots and `0.64em` second slots so ticking time never causes horizontal layout jitter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three-Meter Hierarchy Rule",
+        "body": "Primary time (`clamp(4.2rem, 11.2vw, 9.2rem)` bold) and outdoor telemetry (`clamp(1.9rem, 4.6vw, 3.8rem)` bold) carry the visual weight for across-the-room reading, while dates, conditions, and compact utility controls stay quiet in medium-weight slate (`0.72rem`–`1.05rem`).",
+        "section": "typography"
+      },
+      {
+        "name": "The Zero-Shadow Tonal Plane Rule",
+        "body": "Surfaces never cast drop shadows, ambient glows, or backdrop blur. Spatial depth is established strictly through three flat matte surface steps (`#050506` canvas, `#0E0F12` panel, `#16181E` elevated tile) separated by crisp `1px` hairline borders (`#1E2028` at rest, `#343846` active).",
+        "section": "elevation"
+      },
+      {
+        "name": "The Event-Driven Motion Rule",
+        "body": "Never run continuous 60fps animations or decorative loops. Transitions are short, functional state responses (`150ms`–`300ms`), accompanied only by a once-per-second colon opacity pulse (`180ms`) and a `600ms` ±1px LCD pixel-shift once every 10 minutes.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do enforce `tabular-nums` (`\"tnum\" 1`) and fixed character slots on all live numerals so clock ticks and telemetry refreshes never shift neighboring text.",
+      "Do preserve the three-step flat matte hierarchy (`#050506` canvas, `#0E0F12` panel, `#16181E` elevated control) framed by `1px` hairlines (`#1E2028` / `#343846`).",
+      "Do route every color through CSS custom properties so Night Red mode (`body[data-night=\"true\"]`) collapses the entire interface cleanly into narrow-spectrum crimson at ≥ 4.5:1 contrast.",
+      "Do use Signal Orange (`#E86C3A`) sparingly for temporal anchors, active selections, focus outlines, and linear telemetry fills.",
+      "Do keep motion strictly event-driven (`150ms`–`300ms` transitions, once-per-second colon/bar tick, 10-minute `600ms` ±1px pixel shift) to protect Apple A9 thermals and LCD longevity."
+    ],
+    "donts": [
+      "Don't introduce drop shadows (`box-shadow`), glassmorphism (`backdrop-filter`), neon glows, gradients, or 3D bevels anywhere in the UI.",
+      "Don't add secondary decorative accent colors or allow white, green, blue, or amber elements to leak into Night Red mode.",
+      "Don't run continuous `requestAnimationFrame` loops or decorative idle animations that heat up the device during 24/7 plugged-in operation.",
+      "Don't replace self-hosted Be Vietnam Pro with a display face lacking crisp Vietnamese diacritics or tabular figure support.",
+      "Don't introduce modal overlays that obscure the primary clock when compact controls can swap cleanly inside the right column."
+    ]
+  }
+}

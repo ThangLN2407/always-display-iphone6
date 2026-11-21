@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="StandBy 6s">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#050506">
+  <meta name="format-detection" content="telephone=no">
+  <title>StandBy 6s — Đồng hồ, Lịch Âm Dương &amp; Thời tiết</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Lớp giảm độ sáng phần mềm cho màn hình LCD iPhone 6s ban đêm -->
+  <div id="dimmer-overlay" class="dimmer-overlay" aria-hidden="true"></div>
+
+  <div id="app-shell" class="app-shell">
+    <!-- Thanh trạng thái mảnh tối giản phía trên -->
+    <header class="topbar" role="banner">
+      <div class="topbar-left">
+        <span id="top-weekday" class="top-weekday">Thứ Sáu</span>
+        <span class="top-sep" aria-hidden="true">·</span>
+        <span id="top-solar-date" class="top-solar-date">20/11/2026</span>
+        <span class="top-sep" aria-hidden="true">·</span>
+        <span id="top-lunar-badge" class="top-lunar-badge">12/10 Âm</span>
+      </div>
+
+      <div class="topbar-right">
+        <button type="button" id="btn-location" class="top-pill" title="Đổi vị trí thời tiết" aria-label="Đổi vị trí thời tiết">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10Z"/>
+            <circle cx="12" cy="11" r="2.2"/>
+          </svg>
+          <span id="location-name">Hà Nội</span>
+        </button>
+
+        <button type="button" id="btn-wakelock" class="top-pill" title="Trạng thái giữ màn hình luôn sáng" aria-label="Giữ sáng màn hình">
+          <span id="wakelock-dot" class="status-dot" aria-hidden="true"></span>
+          <span id="wakelock-text">Giữ sáng</span>
+        </button>
+
+        <button type="button" id="btn-rotate" class="top-pill top-pill-icon" title="Khóa xoay ngang 90 độ khi iPhone khóa dọc" aria-label="Xoay ngang 90 độ" aria-pressed="false">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="6" width="18" height="12" rx="2.5"/>
+            <path d="M7 10v4M17 12h.01"/>
+          </svg>
+          <span class="pill-label-compact">90°</span>
+        </button>
+
+        <button type="button" id="btn-night" class="top-pill top-pill-icon" title="Chế độ Đỏ ban đêm (Night Red)" aria-label="Chế độ Đỏ ban đêm" aria-pressed="false">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/>
+          </svg>
+        </button>
+
+        <button type="button" id="btn-settings" class="top-pill top-pill-icon" title="Cài đặt hiển thị" aria-label="Mở cài đặt" aria-expanded="false">
+          <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="17" x2="20" y2="17"/>
+            <circle cx="9" cy="7" r="2" fill="var(--bg-panel)"/>
+            <circle cx="15" cy="12" r="2" fill="var(--bg-panel)"/>
+            <circle cx="11" cy="17" r="2" fill="var(--bg-panel)"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Bố cục chính: Cột Trái (Đồng hồ) + Cột Phải (Lịch + Thời tiết & Độ ẩm) -->
+    <main class="bento-grid" role="main">
+      <!-- CỘT TRÁI: KHỐI ĐỒNG HỒ TRUNG TÂM -->
+      <section id="clock-panel" class="panel clock-panel" aria-label="Đồng hồ chính (Chạm để đổi kiểu)">
+        <div class="clock-header-row">
+          <span id="day-period" class="clock-period">Chiều</span>
+          <span id="clock-style-label" class="clock-style-tag">Tối giản</span>
+        </div>
+
+        <div id="clock-display" class="clock-display" data-style="minimal" role="button" tabindex="0" aria-label="Chạm để đổi kiểu đồng hồ">
+          <div class="clock-readout">
+            <div class="clock-digits-group">
+              <div class="clock-unit clock-hours" aria-label="Giờ">
+                <span id="h-d1" class="digit-slot">1</span><span id="h-d2" class="digit-slot">6</span>
+              </div>
+              <span id="clock-colon" class="clock-colon" aria-hidden="true">:</span>
+              <div class="clock-unit clock-minutes" aria-label="Phút">
+                <span id="m-d1" class="digit-slot">0</span><span id="m-d2" class="digit-slot">5</span>
+              </div>
+            </div>
+            <div class="clock-seconds-wrap" aria-label="Giây">
+              <span id="s-d1" class="sec-slot">0</span><span id="s-d2" class="sec-slot">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thanh tiến trình giây mảnh, không dùng hiệu ứng rườm rà -->
+        <div class="second-track" aria-hidden="true">
+          <div id="second-bar" class="second-bar"></div>
+        </div>
+
+        <footer class="clock-footer">
+          <div id="full-solar-line" class="solar-line">Thứ Sáu, 20 Tháng 11, 2026</div>
+          <div id="full-lunar-line" class="lunar-line">Ngày 12 Tháng Mười Âm lịch · Năm Bính Ngọ</div>
+        </footer>
+      </section>
+
+      <!-- CỘT PHẢI: LỊCH THÁNG + THỜI TIẾT & ĐỘ ẨM (Hoặc Bảng Cài Đặt Gọn) -->
+      <div class="right-column">
+        <!-- TẦNG TRÊN: LỊCH THÁNG (DƯƠNG + ÂM LỊCH) -->
+        <section id="calendar-panel" class="panel calendar-panel" aria-label="Lịch tháng Dương lịch và Âm lịch">
+          <div class="calendar-header">
+            <span id="cal-month-solar" class="cal-title-solar">Tháng 11, 2026</span>
+            <span id="cal-month-lunar" class="cal-title-lunar">Tháng 10 Âm · Ngày Đinh Mão</span>
+          </div>
+
+          <div class="calendar-weekdays" aria-hidden="true">
+            <span>T2</span>
+            <span>T3</span>
+            <span>T4</span>
+            <span>T5</span>
+            <span>T6</span>
+            <span>T7</span>
+            <span class="wk-sun">CN</span>
+          </div>
+
+          <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Lưới ngày trong tháng"></div>
+        </section>
+
+        <!-- TẦNG DƯỚI: 2 KHỐI THỜI TIẾT & ĐỘ ẨM -->
+        <div id="env-row" class="env-row">
+          <!-- KHỐI THỜI TIẾT -->
+          <section class="panel env-panel weather-panel" aria-label="Thời tiết ngoài trời">
+            <div class="env-top">
+              <span id="weather-icon-wrap" class="weather-icon-wrap" aria-hidden="true">
+                <svg class="weather-svg" viewBox="0 0 24 24">
+                  <path d="M17.5 19H7a4.5 4.5 0 0 1-.8-8.9 5.5 5.5 0 0 1 10.7-1.1A4 4 0 0 1 17.5 19Z"/>
+                </svg>
+              </span>
+              <span id="weather-desc" class="env-condition">Đang tải...</span>
+            </div>
+
+            <div class="env-main-value">
+              <span id="temp-value" class="metric-number">--</span><span class="metric-unit">°C</span>
+            </div>
+
+            <div class="env-meta">
+              <span id="temp-hl">-- / --</span>
+              <span id="temp-feels">Như --</span>
+            </div>
+          </section>
+
+          <!-- KHỐI ĐỘ ẨM -->
+          <section class="panel env-panel humidity-panel" aria-label="Độ ẩm không khí">
+            <div class="env-top">
+              <span class="weather-icon-wrap" aria-hidden="true">
+                <svg class="weather-svg" viewBox="0 0 24 24">
+                  <path d="M12 3.2c-3.8 5.2-6.5 8.5-6.5 12.1a6.5 6.5 0 0 0 13 0c0-3.6-2.7-6.9-6.5-12.1Z"/>
+                </svg>
+              </span>
+              <span id="humidity-status" class="env-condition">Đang tải...</span>
+            </div>
+
+            <div class="env-main-value">
+              <span id="humidity-value" class="metric-number">--</span><span class="metric-unit">%</span>
+            </div>
+
+            <div class="humidity-bar-track" aria-hidden="true">
+              <div id="humidity-bar-fill" class="humidity-bar-fill" style="width: 0%"></div>
+            </div>
+
+            <div class="env-meta">
+              <span id="dew-point">Sương --</span>
+              <button type="button" id="weather-updated" class="env-retry-btn" title="Chạm để cập nhật thời tiết">Đang tải</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- BẢNG CÀI ĐẶT NHANH GỌN GÀNG (Ẩn mặc định, hiện ngay trong cột phải khi bấm nút Cài đặt) -->
+        <section id="settings-panel" class="panel settings-panel" hidden aria-label="Cài đặt StandBy">
+          <div class="settings-header">
+            <span class="settings-title">Cài đặt hiển thị</span>
+            <button type="button" id="btn-close-settings" class="btn-text-close">Đóng</button>
+          </div>
+
+          <div class="settings-body">
+            <!-- Chọn thành phố -->
+            <div class="setting-group">
+              <label class="setting-label" for="city-search-input">Khu vực Thời tiết &amp; Độ ẩm</label>
+              <form id="city-search-form" class="city-search-row">
+                <input type="text" id="city-search-input" class="city-input" placeholder="Tìm tỉnh, thành phố..." autocomplete="off">
+                <button type="submit" class="btn-secondary">Tìm</button>
+                <button type="button" id="btn-gps" class="btn-secondary" title="Lấy theo tọa độ GPS">GPS</button>
+              </form>
+              <div id="preset-cities" class="preset-cities">
+                <button type="button" class="chip-city" data-name="Hà Nội" data-lat="21.0285" data-lon="105.8542">Hà Nội</button>
+                <button type="button" class="chip-city" data-name="TP.HCM" data-lat="10.8231" data-lon="106.6297">TP.HCM</button>
+                <button type="button" class="chip-city" data-name="Đà Nẵng" data-lat="16.0544" data-lon="108.2022">Đà Nẵng</button>
+                <button type="button" class="chip-city" data-name="Hải Phòng" data-lat="20.8449" data-lon="106.6881">Hải Phòng</button>
+                <button type="button" class="chip-city" data-name="Cần Thơ" data-lat="10.0452" data-lon="105.7469">Cần Thơ</button>
+                <button type="button" class="chip-city" data-name="Đà Lạt" data-lat="11.9404" data-lon="108.4583">Đà Lạt</button>
+              </div>
+              <div id="search-results" class="search-results" hidden></div>
+            </div>
+
+            <!-- Hàng 1: Kiểu đồng hồ (Full width - 3 nút rộng rãi, không cắt chữ) -->
+            <div class="setting-item">
+              <span class="setting-name">Kiểu đồng hồ</span>
+              <div class="segmented-control" role="group" aria-label="Kiểu đồng hồ">
+                <button type="button" class="seg-btn active" data-clock-style="minimal">Tối giản</button>
+                <button type="button" class="seg-btn" data-clock-style="cards">Thẻ đôi</button>
+                <button type="button" class="seg-btn" data-clock-style="bold">Đậm nét</button>
+              </div>
+            </div>
+
+            <!-- Hàng 2: Định dạng giờ (24h/12h) + Đỏ ban đêm (Tự động/Bật/Tắt) -->
+            <div class="setting-row-grid">
+              <div class="setting-item">
+                <span class="setting-name">Định dạng</span>
+                <div class="segmented-control" role="group" aria-label="Định dạng giờ">
+                  <button type="button" class="seg-btn active" data-hour-format="24">24h</button>
+                  <button type="button" class="seg-btn" data-hour-format="12">12h</button>
+                </div>
+              </div>
+
+              <div class="setting-item">
+                <span class="setting-name">Đỏ ban đêm (22h–6h)</span>
+                <div class="segmented-control" role="group" aria-label="Chế độ Đỏ ban đêm">
+                  <button type="button" class="seg-btn active" data-night-mode="auto">Tự động</button>
+                  <button type="button" class="seg-btn" data-night-mode="on">Bật</button>
+                  <button type="button" class="seg-btn" data-night-mode="off">Tắt</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hàng 3: Giảm sáng phần mềm (LCD Dimmer) -->
+            <div class="setting-dimmer-row">
+              <label class="setting-name" for="dimmer-range">Giảm sáng LCD</label>
+              <input type="range" id="dimmer-range" class="dimmer-range" min="0" max="75" step="5" value="0">
+              <span id="dimmer-val" class="dimmer-value">0%</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="./lunar.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
