@@ -74,9 +74,11 @@
     fullLunarLine: document.getElementById('full-lunar-line'),
 
     calendarPanel: document.getElementById('calendar-panel'),
-    calMonthSolar: document.getElementById('cal-month-solar'),
-    calMonthLunar: document.getElementById('cal-month-lunar'),
-    calendarGrid: document.getElementById('calendar-grid'),
+    calTodayWeekday: document.getElementById('cal-today-weekday'),
+    calTodayMonth: document.getElementById('cal-today-month'),
+    calTodayDay: document.getElementById('cal-today-day'),
+    calTodayLunar: document.getElementById('cal-today-lunar'),
+    calTodayCanChi: document.getElementById('cal-today-canchi'),
 
     envRow: document.getElementById('env-row'),
     weatherIconWrap: document.getElementById('weather-icon-wrap'),
@@ -229,74 +231,17 @@
     els.fullSolarLine.textContent = wk + ', ' + dd + ' Tháng ' + mm + ', ' + yy;
     els.fullLunarLine.textContent = 'Ngày ' + lunar.day + ' ' + lunar.monthLabel + ' · Năm ' + lunar.yearCanChi;
 
-    // Tiêu đề khối lịch tháng
-    els.calMonthSolar.textContent = 'Tháng ' + mm + ', ' + yy;
-    els.calMonthLunar.textContent = 'Tháng ' + lunar.month + (lunar.leap ? ' Nhuận' : '') + ' Âm · Ngày ' + lunar.dayCanChi;
-
-    // Xây dựng lưới lịch 42 ô (Thứ Hai -> Chủ Nhật)
-    var firstDayOfMonth = new Date(yy, mm - 1, 1);
-    var startOffset = (firstDayOfMonth.getDay() + 6) % 7; // T2 = 0 ... CN = 6
-    var daysInMonth = new Date(yy, mm, 0).getDate();
-    var daysInPrevMonth = new Date(yy, mm - 1, 0).getDate();
-
-    var totalCells = 42;
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < totalCells; i++) {
-      var cellDate, cellMonth, cellYear;
-      var isOutside = false;
-
-      if (i < startOffset) {
-        cellDate = daysInPrevMonth - startOffset + i + 1;
-        cellMonth = mm - 1;
-        cellYear = yy;
-        if (cellMonth < 1) {
-          cellMonth = 12;
-          cellYear = yy - 1;
-        }
-        isOutside = true;
-      } else if (i >= startOffset + daysInMonth) {
-        cellDate = i - (startOffset + daysInMonth) + 1;
-        cellMonth = mm + 1;
-        cellYear = yy;
-        if (cellMonth > 12) {
-          cellMonth = 1;
-          cellYear = yy + 1;
-        }
-        isOutside = true;
-      } else {
-        cellDate = i - startOffset + 1;
-        cellMonth = mm;
-        cellYear = yy;
-      }
-
-      var cellLunar = window.LunarCalendar.convertSolar2Lunar(cellDate, cellMonth, cellYear, 7);
-      var isToday = !isOutside && cellDate === dd;
-      var isSunday = (i % 7) === 6;
-
-      var cellEl = document.createElement('div');
-      var classes = ['cal-cell'];
-      if (isOutside) classes.push('is-outside');
-      if (isToday) classes.push('is-today');
-      if (isSunday) classes.push('is-sunday');
-      cellEl.className = classes.join(' ');
-      cellEl.setAttribute('role', 'gridcell');
-
-      var solarSpan = document.createElement('span');
-      solarSpan.className = 'cal-solar';
-      solarSpan.textContent = String(cellDate);
-
-      var lunarSpan = document.createElement('sub');
-      lunarSpan.className = 'cal-lunar' + (cellLunar.isSpecial ? ' is-special' : '');
-      lunarSpan.textContent = cellLunar.shortCell;
-
-      cellEl.appendChild(solarSpan);
-      cellEl.appendChild(lunarSpan);
-      fragment.appendChild(cellEl);
+    // Khối lịch ngày hiện tại căn giữa + Âm lịch phía dưới
+    els.calTodayWeekday.textContent = wk;
+    els.calTodayMonth.textContent = 'Tháng ' + mm + ', ' + yy;
+    els.calTodayDay.textContent = String(dd);
+    els.calTodayLunar.textContent = lunar.day + ' ' + lunar.monthLabel + ' Âm lịch';
+    if (lunar.isSpecial) {
+      els.calTodayLunar.classList.add('is-special');
+    } else {
+      els.calTodayLunar.classList.remove('is-special');
     }
-
-    els.calendarGrid.innerHTML = '';
-    els.calendarGrid.appendChild(fragment);
+    els.calTodayCanChi.textContent = 'Ngày ' + lunar.dayCanChi + ' · Năm ' + lunar.yearCanChi;
   }
 
   // =========================================================================

@@ -574,119 +574,74 @@ input:focus-visible,
   min-width: 0;
 }
 
-/* Khối Lịch Tháng */
+/* Khối Lịch Ngày Hiện Tại (Căn giữa + Âm lịch phía dưới) */
 .calendar-panel {
-  flex: 1.32;
+  flex: 1.24;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 14px 12px;
-}
-
-.calendar-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 2px;
-}
-
-.cal-title-solar {
-  font-size: clamp(0.82rem, 1.75vw, 1rem);
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.cal-title-lunar {
-  font-size: clamp(0.72rem, 1.35vw, 0.84rem);
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  text-align: center;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.wk-sun {
-  color: var(--accent);
-}
-
-.calendar-grid {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: repeat(6, minmax(0, 1fr));
   align-items: center;
-  column-gap: 2px;
-  row-gap: 1px;
-  padding-top: 2px;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(4px, 1.4vmin, 12px);
+  padding: 12px 16px;
 }
 
-.cal-cell {
+.cal-today-top {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 3px;
-  height: 100%;
-  max-height: 30px;
-  border-radius: 7px;
-  padding: 2px 3px;
-  line-height: 1;
-}
-
-.cal-cell.is-outside {
-  opacity: 0.35;
-}
-
-.cal-solar {
-  font-size: clamp(0.72rem, 1.45vw, 0.88rem);
+  gap: 6px;
+  font-size: clamp(0.8rem, 2.2vmin, 1.15rem);
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.cal-today-weekday {
+  color: var(--accent);
+}
+
+.cal-today-sep {
+  color: var(--text-muted);
+}
+
+.cal-today-month {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.cal-today-day {
+  font-size: clamp(3.6rem, 18vmin, 8.6rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
 }
 
-.cal-cell.is-sunday .cal-solar {
-  color: var(--accent);
+.cal-today-lunar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 
-.cal-lunar {
-  font-size: clamp(0.56rem, 1vw, 0.66rem);
-  font-weight: 400;
-  color: var(--text-muted);
-  vertical-align: baseline;
+.cal-today-lunar {
+  font-size: clamp(0.78rem, 2.1vmin, 1.05rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.25;
 }
 
-.cal-lunar.is-special {
+.cal-today-lunar.is-special {
   color: var(--accent);
   font-weight: 600;
 }
 
-.cal-cell.is-today {
-  background-color: var(--accent);
-  align-items: center;
-  gap: 5px;
-}
-
-.cal-cell.is-today .cal-solar {
-  color: var(--accent-ink);
-  font-weight: 700;
-}
-
-.cal-cell.is-today .cal-lunar {
-  color: var(--accent-ink);
-  font-weight: 500;
-  opacity: 0.72;
+.cal-today-canchi {
+  font-size: clamp(0.72rem, 1.6vmin, 0.88rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.2;
 }
 
 /* ==========================================================================

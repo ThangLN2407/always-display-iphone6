@@ -1,11 +1,11 @@
-var CACHE_NAME = 'standby-6s-v5';
+var CACHE_NAME = 'standby-6s-v6';
 var STATIC_ASSETS = [
   './',
   './index.html',
-  './styles.css?v=5',
-  './lunar.js?v=5',
-  './app.js?v=5',
-  './manifest.json?v=5',
+  './styles.css?v=6',
+  './lunar.js?v=6',
+  './app.js?v=6',
+  './manifest.json?v=6',
   './icon.svg',
   './apple-touch-icon.png',
   './nosleep.mp4',

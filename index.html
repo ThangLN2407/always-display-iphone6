@@ -10,10 +10,10 @@
   <meta name="theme-color" content="#050506">
   <meta name="format-detection" content="telephone=no">
   <title>StandBy 6s — Đồng hồ, Lịch Âm Dương &amp; Thời tiết</title>
-  <link rel="manifest" href="./manifest.json?v=5">
+  <link rel="manifest" href="./manifest.json?v=6">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="stylesheet" href="./styles.css?v=5">
+  <link rel="stylesheet" href="./styles.css?v=6">
 </head>
 <body>
   <!-- Lớp giảm độ sáng phần mềm cho màn hình LCD iPhone 6s ban đêm -->
@@ -109,26 +109,22 @@
         </footer>
       </section>
 
-      <!-- CỘT PHẢI: LỊCH THÁNG + THỜI TIẾT & ĐỘ ẨM (Hoặc Bảng Cài Đặt Gọn) -->
+      <!-- CỘT PHẢI: LỊCH NGÀY HIỆN TẠI + THỜI TIẾT & ĐỘ ẨM (Hoặc Bảng Cài Đặt Gọn) -->
       <div class="right-column">
-        <!-- TẦNG TRÊN: LỊCH THÁNG (DƯƠNG + ÂM LỊCH) -->
-        <section id="calendar-panel" class="panel calendar-panel" aria-label="Lịch tháng Dương lịch và Âm lịch">
-          <div class="calendar-header">
-            <span id="cal-month-solar" class="cal-title-solar">Tháng 11, 2026</span>
-            <span id="cal-month-lunar" class="cal-title-lunar">Tháng 10 Âm · Ngày Đinh Mão</span>
+        <!-- TẦNG TRÊN: LỊCH NGÀY HIỆN TẠI CĂN GIỮA + ÂM LỊCH PHÍA DƯỚI -->
+        <section id="calendar-panel" class="panel calendar-panel" aria-label="Ngày hiện tại Dương lịch và Âm lịch">
+          <div class="cal-today-top">
+            <span id="cal-today-weekday" class="cal-today-weekday">Thứ Bảy</span>
+            <span class="cal-today-sep" aria-hidden="true">·</span>
+            <span id="cal-today-month" class="cal-today-month">Tháng 11, 2026</span>
           </div>
 
-          <div class="calendar-weekdays" aria-hidden="true">
-            <span>T2</span>
-            <span>T3</span>
-            <span>T4</span>
-            <span>T5</span>
-            <span>T6</span>
-            <span>T7</span>
-            <span class="wk-sun">CN</span>
-          </div>
+          <div id="cal-today-day" class="cal-today-day">21</div>
 
-          <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Lưới ngày trong tháng"></div>
+          <div class="cal-today-lunar-wrap">
+            <div id="cal-today-lunar" class="cal-today-lunar">13 Tháng Mười Âm lịch</div>
+            <div id="cal-today-canchi" class="cal-today-canchi">Ngày Kỷ Hợi · Năm Bính Ngọ</div>
+          </div>
         </section>
 
         <!-- TẦNG DƯỚI: 2 KHỐI THỜI TIẾT & ĐỘ ẨM -->
@@ -249,7 +245,7 @@
     </main>
   </div>
 
-  <script src="./lunar.js?v=5"></script>
-  <script src="./app.js?v=5"></script>
+  <script src="./lunar.js?v=6"></script>
+  <script src="./app.js?v=6"></script>
 </body>
 </html>
