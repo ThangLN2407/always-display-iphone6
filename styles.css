@@ -254,15 +254,31 @@ input:focus-visible,
   transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Chế độ cưỡng bức xoay ngang 90° khi iPhone 6s đang bật khóa xoay dọc */
-body[data-force-landscape="true"] .app-shell {
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  width: 100vh;
-  height: 100vw;
-  transform: translate(-50%, -50%) rotate(90deg) translate3d(var(--shift-x), var(--shift-y), 0);
+/* Chế độ khóa chết ngang 90° khi điện thoại đang ở tư thế dọc (hỗ trợ đảo 2 chiều dây sạc) */
+@media (orientation: portrait) {
+  body[data-force-landscape="cw"] .app-shell {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: 100vh;
+    height: 100vw;
+    padding: 8px 14px;
+    gap: 6px;
+    transform: translate(-50%, -50%) rotate(90deg) translate3d(var(--shift-x), var(--shift-y), 0);
+  }
+
+  body[data-force-landscape="ccw"] .app-shell {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: 100vh;
+    height: 100vw;
+    padding: 8px 14px;
+    gap: 6px;
+    transform: translate(-50%, -50%) rotate(-90deg) translate3d(var(--shift-x), var(--shift-y), 0);
+  }
 }
 
 /* ==========================================================================
@@ -392,7 +408,7 @@ body[data-force-landscape="true"] .app-shell {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px 18px;
+  padding: 12px 16px;
   min-height: 0;
   min-width: 0;
   overflow: hidden;
@@ -424,57 +440,60 @@ body[data-force-landscape="true"] .app-shell {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 4px 0;
+  padding: 2px 0;
 }
 
-.clock-readout {
-  display: inline-flex;
+.clock-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 1.2vmin, 14px);
+}
+
+.clock-row {
+  position: relative;
+  display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: clamp(4px, 0.9vw, 12px);
-  max-width: 100%;
-}
-
-.clock-digits-group {
-  display: inline-flex;
-  align-items: baseline;
-  font-size: clamp(4.2rem, 11.2vw, 9.2rem);
-  font-weight: 700;
-  line-height: 0.94;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
 }
 
 .clock-unit {
   display: inline-flex;
   align-items: baseline;
+  font-size: clamp(5.2rem, 27vmin, 13.5rem);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+}
+
+.clock-hours {
+  color: var(--text-primary);
+}
+
+.clock-minutes {
+  color: var(--text-primary);
+  opacity: 0.86;
 }
 
 .digit-slot {
   display: inline-flex;
   justify-content: center;
-  width: 0.62em;
+  width: 0.63em;
 }
 
-.clock-colon {
-  display: inline-flex;
-  justify-content: center;
-  width: 0.26em;
-  color: var(--text-secondary);
-  transform: translateY(-0.06em);
-  transition: opacity 180ms ease-out;
-}
-
-.clock-colon.dim {
-  opacity: 0.28;
-}
-
-.clock-seconds-wrap {
-  display: inline-flex;
+/* Góc nhỏ bên phải hàng phút dành cho giây (chỉ hiện ở kiểu "Có giây") */
+.clock-seconds-corner {
+  display: none;
+  position: absolute;
+  left: calc(100% + clamp(6px, 1.8vmin, 16px));
+  bottom: 0.08em;
   align-items: baseline;
-  font-size: clamp(1.25rem, 3.2vw, 2.4rem);
+  font-size: clamp(1.1rem, 4.8vmin, 2.2rem);
   font-weight: 600;
-  color: var(--text-secondary);
+  line-height: 1;
+  color: var(--text-muted);
   letter-spacing: -0.02em;
 }
 
@@ -484,29 +503,23 @@ body[data-force-landscape="true"] .app-shell {
   width: 0.64em;
 }
 
-/* Kiểu 2: Thẻ đôi (Split Cards) */
-.clock-display[data-style="cards"] .clock-digits-group {
-  font-size: clamp(3.5rem, 9.2vw, 7.6rem);
+/* Kiểu 2: Thẻ đôi xếp tầng (Split Stacked Cards) */
+.clock-display[data-style="cards"] .clock-stack {
+  gap: clamp(6px, 1.8vmin, 16px);
 }
 
 .clock-display[data-style="cards"] .clock-unit {
+  font-size: clamp(4.3rem, 21.5vmin, 10.8rem);
+  line-height: 0.92;
   background-color: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: 10px;
-  padding: 0.09em 0.12em;
+  padding: 0.08em 0.22em;
 }
 
-.clock-display[data-style="cards"] .clock-colon {
-  width: 0.22em;
-}
-
-/* Kiểu 3: Đậm nét (Ẩn giây số, tập trung tối đa giờ:phút) */
-.clock-display[data-style="bold"] .clock-seconds-wrap {
-  display: none;
-}
-
-.clock-display[data-style="bold"] .clock-digits-group {
-  font-size: clamp(4.9rem, 13.2vw, 10.5rem);
+/* Kiểu 3: Có giây (hiện giây gọn ở góc phải hàng phút) */
+.clock-display[data-style="seconds"] .clock-seconds-corner {
+  display: inline-flex;
 }
 
 /* Thanh tiến trình giây tối giản */
@@ -516,7 +529,7 @@ body[data-force-landscape="true"] .app-shell {
   background-color: var(--bg-elevated);
   border-radius: 2px;
   overflow: hidden;
-  margin-bottom: clamp(8px, 2vh, 14px);
+  margin-bottom: clamp(6px, 1.6vmin, 14px);
 }
 
 .second-bar {
@@ -1006,42 +1019,38 @@ body[data-force-landscape="true"] .app-shell {
    Responsive Portrait Adaptation (when opened vertically without 90° lock)
    ========================================================================== */
 @media (max-width: 560px) and (orientation: portrait) {
-  body:not([data-force-landscape="true"]) .topbar {
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .topbar {
     flex-wrap: wrap;
     height: auto;
     gap: 6px;
   }
 
-  body:not([data-force-landscape="true"]) .bento-grid {
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .bento-grid {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
   }
 
-  body:not([data-force-landscape="true"]) .clock-panel {
-    padding: 14px 16px;
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .clock-panel {
+    padding: 12px 16px;
   }
 
-  body:not([data-force-landscape="true"]) .clock-display {
-    padding: 10px 0 18px;
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .clock-display {
+    padding: 8px 0 12px;
   }
 
-  body:not([data-force-landscape="true"]) .second-track {
-    margin-bottom: 12px;
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .second-track {
+    margin-bottom: 10px;
   }
 
-  body:not([data-force-landscape="true"]) .clock-digits-group {
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .clock-unit {
     font-size: 4.2rem;
   }
 
-  body:not([data-force-landscape="true"]) .clock-display[data-style="cards"] .clock-digits-group {
-    font-size: 3.4rem;
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .clock-display[data-style="cards"] .clock-unit {
+    font-size: 3.5rem;
   }
 
-  body:not([data-force-landscape="true"]) .clock-display[data-style="bold"] .clock-digits-group {
-    font-size: 4.8rem;
-  }
-
-  body:not([data-force-landscape="true"]) .setting-row-grid {
+  body:not([data-force-landscape="cw"]):not([data-force-landscape="ccw"]) .setting-row-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }

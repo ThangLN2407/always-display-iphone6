@@ -14,12 +14,19 @@
     'Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'
   ];
 
-  var CLOCK_STYLES = ['minimal', 'cards', 'bold'];
+  var CLOCK_STYLES = ['minimal', 'cards', 'seconds'];
   var CLOCK_STYLE_LABELS = {
-    minimal: 'Tối giản',
+    minimal: 'Xếp tầng',
     cards: 'Thẻ đôi',
-    bold: 'Đậm nét'
+    seconds: 'Có giây'
   };
+
+  function isStandalonePwa() {
+    return (
+      window.navigator.standalone === true ||
+      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
+    );
+  }
 
   var defaultConfig = {
     cityName: 'Hà Nội',
@@ -29,7 +36,7 @@
     hourFormat: '24',
     nightMode: 'auto', // 'auto' | 'on' | 'off'
     dimmer: 0,
-    forceLandscape: false
+    forceLandscape: isStandalonePwa() ? 'cw' : 'off' // 'cw' (+90°) | 'ccw' (-90°) | 'off'
   };
 
   var config = loadConfig();
@@ -62,7 +69,6 @@
     mD2: document.getElementById('m-d2'),
     sD1: document.getElementById('s-d1'),
     sD2: document.getElementById('s-d2'),
-    clockColon: document.getElementById('clock-colon'),
     secondBar: document.getElementById('second-bar'),
     fullSolarLine: document.getElementById('full-solar-line'),
     fullLunarLine: document.getElementById('full-lunar-line'),
@@ -105,6 +111,15 @@
         if (Object.prototype.hasOwnProperty.call(parsed, k)) {
           merged[k] = parsed[k];
         }
+      }
+      // Di chuyển cấu hình cũ sang phiên bản v4
+      if (CLOCK_STYLES.indexOf(merged.clockStyle) === -1) {
+        merged.clockStyle = 'minimal';
+      }
+      if (merged.forceLandscape === true) {
+        merged.forceLandscape = 'cw';
+      } else if (merged.forceLandscape === false) {
+        merged.forceLandscape = isStandalonePwa() ? 'cw' : 'off';
       }
       return merged;
     } catch (e) {
@@ -167,12 +182,6 @@
     els.mD2.textContent = mStr.charAt(1);
     els.sD1.textContent = sStr.charAt(0);
     els.sD2.textContent = sStr.charAt(1);
-
-    if (seconds % 2 === 1) {
-      els.clockColon.classList.add('dim');
-    } else {
-      els.clockColon.classList.remove('dim');
-    }
 
     var pct = ((seconds / 59) * 100).toFixed(1);
     els.secondBar.style.width = pct + '%';
@@ -467,7 +476,7 @@
 
     // Clock style
     els.clockDisplay.setAttribute('data-style', config.clockStyle);
-    els.clockStyleLabel.textContent = CLOCK_STYLE_LABELS[config.clockStyle] || 'Tối giản';
+    els.clockStyleLabel.textContent = CLOCK_STYLE_LABELS[config.clockStyle] || 'Xếp tầng';
 
     // Dimmer
     var dimPct = Number(config.dimmer) || 0;
@@ -475,13 +484,20 @@
     els.dimmerVal.textContent = dimPct + '%';
     els.dimmerOverlay.style.opacity = (dimPct / 100).toFixed(2);
 
-    // Force landscape 90°
-    if (config.forceLandscape) {
-      document.body.setAttribute('data-force-landscape', 'true');
+    // Force landscape 90° ('cw' | 'ccw' | 'off')
+    var rotateLabel = els.btnRotate.querySelector('.pill-label-compact');
+    if (config.forceLandscape === 'cw' || config.forceLandscape === 'ccw') {
+      document.body.setAttribute('data-force-landscape', config.forceLandscape);
       els.btnRotate.setAttribute('aria-pressed', 'true');
+      if (rotateLabel) {
+        rotateLabel.textContent = config.forceLandscape === 'ccw' ? '-90°' : '90°';
+      }
     } else {
       document.body.removeAttribute('data-force-landscape');
       els.btnRotate.setAttribute('aria-pressed', 'false');
+      if (rotateLabel) {
+        rotateLabel.textContent = '90°';
+      }
     }
 
     // Night mode
@@ -723,9 +739,15 @@
       enableWakeLock();
     });
 
-    // Nút khóa xoay ngang 90°
+    // Nút khóa xoay ngang 90° / đảo chiều -90° / tắt
     els.btnRotate.addEventListener('click', function () {
-      config.forceLandscape = !config.forceLandscape;
+      if (config.forceLandscape === 'cw') {
+        config.forceLandscape = 'ccw';
+      } else if (config.forceLandscape === 'ccw') {
+        config.forceLandscape = 'off';
+      } else {
+        config.forceLandscape = 'cw';
+      }
       saveConfig();
       applyConfigToUI();
     });
@@ -853,8 +875,24 @@
     setInterval(runPixelShift, PIXEL_SHIFT_INTERVAL_MS);
 
     if ('serviceWorker' in navigator) {
+      var swReloaded = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (!swReloaded) {
+          swReloaded = true;
+          window.location.reload();
+        }
+      });
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./sw.js').catch(function () {});
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' })
+          .then(function (reg) {
+            reg.update().catch(function () {});
+            document.addEventListener('visibilitychange', function () {
+              if (document.visibilityState === 'visible') {
+                reg.update().catch(function () {});
+              }
+            });
+          })
+          .catch(function () {});
       });
     }
   }

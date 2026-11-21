@@ -10,10 +10,10 @@
   <meta name="theme-color" content="#050506">
   <meta name="format-detection" content="telephone=no">
   <title>StandBy 6s — Đồng hồ, Lịch Âm Dương &amp; Thời tiết</title>
-  <link rel="manifest" href="./manifest.json">
+  <link rel="manifest" href="./manifest.json?v=5">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=5">
 </head>
 <body>
   <!-- Lớp giảm độ sáng phần mềm cho màn hình LCD iPhone 6s ban đêm -->
@@ -73,26 +73,27 @@
 
     <!-- Bố cục chính: Cột Trái (Đồng hồ) + Cột Phải (Lịch + Thời tiết & Độ ẩm) -->
     <main class="bento-grid" role="main">
-      <!-- CỘT TRÁI: KHỐI ĐỒNG HỒ TRUNG TÂM -->
+      <!-- CỘT TRÁI: KHỐI ĐỒNG HỒ XẾP TẦNG TRUNG TÂM -->
       <section id="clock-panel" class="panel clock-panel" aria-label="Đồng hồ chính (Chạm để đổi kiểu)">
         <div class="clock-header-row">
           <span id="day-period" class="clock-period">Chiều</span>
-          <span id="clock-style-label" class="clock-style-tag">Tối giản</span>
+          <span id="clock-style-label" class="clock-style-tag">Xếp tầng</span>
         </div>
 
         <div id="clock-display" class="clock-display" data-style="minimal" role="button" tabindex="0" aria-label="Chạm để đổi kiểu đồng hồ">
-          <div class="clock-readout">
-            <div class="clock-digits-group">
+          <div class="clock-stack">
+            <div class="clock-row clock-row-hours">
               <div class="clock-unit clock-hours" aria-label="Giờ">
                 <span id="h-d1" class="digit-slot">1</span><span id="h-d2" class="digit-slot">6</span>
               </div>
-              <span id="clock-colon" class="clock-colon" aria-hidden="true">:</span>
+            </div>
+            <div class="clock-row clock-row-minutes">
               <div class="clock-unit clock-minutes" aria-label="Phút">
                 <span id="m-d1" class="digit-slot">0</span><span id="m-d2" class="digit-slot">5</span>
               </div>
-            </div>
-            <div class="clock-seconds-wrap" aria-label="Giây">
-              <span id="s-d1" class="sec-slot">0</span><span id="s-d2" class="sec-slot">0</span>
+              <div class="clock-seconds-corner" aria-label="Giây">
+                <span id="s-d1" class="sec-slot">0</span><span id="s-d2" class="sec-slot">0</span>
+              </div>
             </div>
           </div>
         </div>
@@ -210,9 +211,9 @@
             <div class="setting-item">
               <span class="setting-name">Kiểu đồng hồ</span>
               <div class="segmented-control" role="group" aria-label="Kiểu đồng hồ">
-                <button type="button" class="seg-btn active" data-clock-style="minimal">Tối giản</button>
+                <button type="button" class="seg-btn active" data-clock-style="minimal">Xếp tầng</button>
                 <button type="button" class="seg-btn" data-clock-style="cards">Thẻ đôi</button>
-                <button type="button" class="seg-btn" data-clock-style="bold">Đậm nét</button>
+                <button type="button" class="seg-btn" data-clock-style="seconds">Có giây</button>
               </div>
             </div>
 
@@ -248,7 +249,7 @@
     </main>
   </div>
 
-  <script src="./lunar.js"></script>
-  <script src="./app.js"></script>
+  <script src="./lunar.js?v=5"></script>
+  <script src="./app.js?v=5"></script>
 </body>
 </html>

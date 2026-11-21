@@ -1,11 +1,11 @@
-var CACHE_NAME = 'standby-6s-v3';
+var CACHE_NAME = 'standby-6s-v5';
 var STATIC_ASSETS = [
   './',
   './index.html',
-  './styles.css',
-  './lunar.js',
-  './app.js',
-  './manifest.json',
+  './styles.css?v=5',
+  './lunar.js?v=5',
+  './app.js?v=5',
+  './manifest.json?v=5',
   './icon.svg',
   './apple-touch-icon.png',
   './nosleep.mp4',
@@ -83,9 +83,9 @@ self.addEventListener('fetch', function (event) {
     return;
   }
 
-  // App shell (HTML/CSS/JS): Network-first with offline cache fallback
+  // App shell (HTML/CSS/JS): Network-first bypassing HTTP cache with offline fallback
   event.respondWith(
-    fetch(req)
+    fetch(req, { cache: 'no-cache' })
       .then(function (res) {
         if (res && res.status === 200 && res.type === 'basic') {
           var clone = res.clone();
